@@ -1,0 +1,19 @@
+{
+  "name": "art-api",
+  "version": "1.0.0",
+  "description": "Provides JSON data on various paintings and their attributes.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TechPowerAwaits/4513-Assign1.git"
+  },
+  "author": "Richard Johnston",
+  "license": "0BSD",
+  "bugs": {
+    "url": "https://github.com/TechPowerAwaits/4513-Assign1/issues"
+  },
+  "homepage": "https://github.com/TechPowerAwaits/4513-Assign1#readme"
+}
