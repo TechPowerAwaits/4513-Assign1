@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/TechPowerAwaits/4513-Assign1/issues"
   },
-  "homepage": "https://github.com/TechPowerAwaits/4513-Assign1#readme"
+  "homepage": "https://github.com/TechPowerAwaits/4513-Assign1#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
 }
