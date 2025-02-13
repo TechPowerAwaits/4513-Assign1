@@ -53,7 +53,7 @@ Contains `galleryId`, `galleryName`, `galleryNativeName`, `galleryCity`, `galler
 |===
 | Link | Description
 
-| {base-url}/api/era
+| {base-url}/api/eras
 | Returns all the eras for paintings.
 
 | {base-url}/api/galleries
