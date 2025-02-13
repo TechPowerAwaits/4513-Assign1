@@ -1,0 +1,73 @@
+# Art API
+Richard Johnston <techpowerawaits@outlook.com>
+
+:base-url: https://art-api-kafs.onrender.com
+
+== About
+This project provides an API for accessing data on various paintings.
+It was created for a Web Development course at https://www.mtroyal.ca/[Mount Royal University] taught by https://randyconnolly.com/[Randy Connolly] during the Winter of 2025.
+
+=== License
+The code written is licensed under the https://spdx.org/licenses/0BSD.html[BSD Zero-Clause License]:
+
+....
+Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+....
+
+The data itself was is from an unknown source.
+
+=== Original Assignment
+The assignment information can be found at: https://github.com/mru-comp4513-archive/w2025-assign1.
+
+Thanks to https://randyconnolly.com/[Randy Connolly] for proving the assignment.
+The aim of the original project was learning how to use Supabase alongside NodeJS to create a simple API.
+
+== Provided Routes
+
+All data provided is in JSON.
+
+|===
+| Route | Description
+
+| /api/eras
+| Returns all the eras for paintings.
+Contains `eraId`, `eraName`, and `eraYears`.
+
+| /api/galleries
+| Returns all the galleries containing paintings.
+Contains `galleryId`, `galleryName`, `galleryNativeName`, `galleryCity`, `galleryAddress`, `galleryCountry`, `latitude`, `longitude`, `galleryWebSite`, `flickrPlaceId`, `yahooWoeId`, and `googlePlaceId`.
+
+| /api/galleries/_ref_
+| Returns the gallery corresponding to the `galleryId` provided in _ref_.
+Contains `galleryId`, `galleryName`, `galleryNativeName`, `galleryCity`, `galleryAddress`, `galleryCountry`, `latitude`, `longitude`, `galleryWebSite`, `flickrPlaceId`, `yahooWoeId`, and `googlePlaceId` when ID is valid. Returns an error otherwise.
+
+| /api/galleries/country/_substring_
+| Returns all the galleries in the country starting with the given _substring_.
+Contains `galleryId`, `galleryName`, `galleryNativeName`, `galleryCity`, `galleryAddress`, `galleryCountry`, `latitude`, `longitude`, `galleryWebSite`, `flickrPlaceId`, `yahooWoeId`, and `googlePlaceId` when _substring_ results in a match. Returns an error otherwise.
+|===
+
+== Test Links
+
+|===
+| Link | Description
+
+| {base-url}/api/era
+| Returns all the eras for paintings.
+
+| {base-url}/api/galleries
+| Returns all the galleries containing paintings.
+
+| {base-url}/api/galleries/30
+| Returns the gallery with `galleryId` of 30.
+
+| {base-url}/api/galleries/1
+| Returns an error since there is no gallery with `galleryId` of 1.
+
+| {base-url}/api/galleries/country/fra
+| Returns all the galleries based in a country starting with "fra".
+
+| {base-url}/api/galleries/country/not
+| Returns an error since there are no galleries based in a country starting with "not".
+|===
