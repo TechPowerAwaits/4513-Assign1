@@ -1,4 +1,4 @@
-import { setError } from "./error.mjs";
+import { ErrorMsg, errorMessages } from "./ErrorMsg.mjs";
 
 import { createClient } from "@supabase/supabase-js";
 const supabase = createClient(
@@ -12,12 +12,7 @@ async function setApiRoutes(router) {
       .from("Eras")
       .select("eraId, eraName, eraYears");
 
-    if (error) {
-      console.error(error);
-      resp.status(500).send(setError(error));
-    } else {
-      resp.send(data);
-    }
+    handleQueryResults(resp, data, error);
   });
 
   router.get("/galleries", async (req, resp) => {
@@ -27,12 +22,7 @@ async function setApiRoutes(router) {
         "galleryId, galleryName, galleryNativeName, galleryCity, galleryAddress, galleryCountry, latitude, longitude, galleryWebSite, flickrPlaceId, yahooWoeId, googlePlaceId"
       );
 
-    if (error) {
-      console.error(error);
-      resp.status(500).send(setError(error));
-    } else {
-      resp.send(data);
-    }
+    handleQueryResults(resp, data, error);
   });
 
   router.get("/galleries/:ref", async (req, resp) => {
@@ -43,12 +33,7 @@ async function setApiRoutes(router) {
       )
       .eq("galleryId", req.params.ref);
 
-    if (error) {
-      console.error(error);
-      resp.status(500).send(setError(error));
-    } else {
-      resp.send(data);
-    }
+    handleQueryResults(resp, data, error);
   });
 
   router.get("/galleries/country/:substring", async (req, resp) => {
@@ -59,13 +44,30 @@ async function setApiRoutes(router) {
       )
       .ilike("galleryCountry", `${req.params.substring}%`);
 
-    if (error) {
-      console.error(error);
-      resp.status(500).send(setError(error));
-    } else {
-      resp.send(data);
-    }
+    handleQueryResults(resp, data, error);
   });
+}
+
+/*
+ * Purpose: Handles the results of querying for data.
+ */
+function handleQueryResults(resp, data, error = null) {
+  if (error) {
+    handleInternalError(resp, error);
+  } else if (data.length == 0) {
+    handleNoDataError(resp);
+  } else {
+    resp.send(data);
+  }
+
+  function handleInternalError(resp, error) {
+    console.error(error);
+    resp.status(500).send(new ErrorMsg(errorMessages["internal"]));
+  }
+
+  function handleNoDataError(resp) {
+    resp.status(404).send(new ErrorMsg(errorMessages["noData"]));
+  }
 }
 
 export { setApiRoutes };
