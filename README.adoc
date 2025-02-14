@@ -43,15 +43,22 @@ Contains `galleryId`, `galleryName`, `galleryNativeName`, `galleryCity`, `galler
 
 | /api/galleries/_ref_
 | Returns the gallery corresponding to the `galleryId` provided in _ref_.
-Contains `galleryId`, `galleryName`, `galleryNativeName`, `galleryCity`, `galleryAddress`, `galleryCountry`, `latitude`, `longitude`, `galleryWebSite`, `flickrPlaceId`, `yahooWoeId`, and `googlePlaceId` when ID is valid. Returns an error otherwise.
+Contains `galleryId`, `galleryName`, `galleryNativeName`, `galleryCity`, `galleryAddress`, `galleryCountry`, `latitude`, `longitude`, `galleryWebSite`, `flickrPlaceId`, `yahooWoeId`, and `googlePlaceId` when ID is valid.
+Returns an error otherwise.
 
 | /api/galleries/country/_substring_
 | Returns all the galleries in the country starting with the given _substring_.
-Contains `galleryId`, `galleryName`, `galleryNativeName`, `galleryCity`, `galleryAddress`, `galleryCountry`, `latitude`, `longitude`, `galleryWebSite`, `flickrPlaceId`, `yahooWoeId`, and `googlePlaceId` when _substring_ results in a match. Returns an error otherwise.
+Contains `galleryId`, `galleryName`, `galleryNativeName`, `galleryCity`, `galleryAddress`, `galleryCountry`, `latitude`, `longitude`, `galleryWebSite`, `flickrPlaceId`, `yahooWoeId`, and `googlePlaceId` when _substring_ results in a match.
+Returns an error otherwise.
 
 | /api/artists
 | Returns all the artists.
 Contains `artistId`, `firstName`, `lastName`, `nationality`, `gender`, `yearOfBirth`, `yearOfDeath`, `details`, and `artistLink`.
+
+| /api/artists/_ref_
+| Returns the artist corresponding to the `artistId` provided in _ref_.
+Contains `artistId`, `firstName`, `lastName`, `nationality`, `gender`, `yearOfBirth`, `yearOfDeath`, `details`, and `artistLink` when ID is valid.
+Returns an error otherwise.
 |===
 
 == Test Links
@@ -82,4 +89,12 @@ Contains `artistId`, `firstName`, `lastName`, `nationality`, `gender`, `yearOfBi
 2+^| */api/artists*
 | {base-url}/api/artists
 | Returns all the artists.
+
+2+^| */api/artists/_ref_*
+| {base-url}/api/artists/12
+| Returns the artist with `artistId` of 12.
+| {base-url}/api/artists/1223423
+| Returns an error since there is no artist with `artistId` of 1223423.
+| {base-url}/api/artists/0
+| Returns an error since there is no artist with `artistId` of 0.
 |===

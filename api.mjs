@@ -56,6 +56,17 @@ async function setApiRoutes(router) {
 
     handleQueryResults(resp, data, error);
   });
+
+  router.get("/artists/:ref", async (req, resp) => {
+    const { data, error } = await supabase
+      .from("Artists")
+      .select(
+        "artistId, firstName, lastName, nationality, gender, yearOfBirth, yearOfDeath, details, artistLink"
+      )
+      .eq("artistId", req.params.ref);
+
+    handleQueryResults(resp, data, error);
+  });
 }
 
 /*
