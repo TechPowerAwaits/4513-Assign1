@@ -53,21 +53,23 @@ Contains `galleryId`, `galleryName`, `galleryNativeName`, `galleryCity`, `galler
 |===
 | Link | Description
 
+2+^| */api/eras*
 | {base-url}/api/eras
 | Returns all the eras for paintings.
 
+2+^| */api/galleries*
 | {base-url}/api/galleries
 | Returns all the galleries containing paintings.
 
+2+^| */api/galleries/_ref_*
 | {base-url}/api/galleries/30
 | Returns the gallery with `galleryId` of 30.
-
 | {base-url}/api/galleries/1
 | Returns an error since there is no gallery with `galleryId` of 1.
 
+2+^| */api/galleries/country/_substring_*
 | {base-url}/api/galleries/country/fra
 | Returns all the galleries based in a country starting with "fra".
-
 | {base-url}/api/galleries/country/not
 | Returns an error since there are no galleries based in a country starting with "not".
 |===
