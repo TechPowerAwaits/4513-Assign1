@@ -1,7 +1,9 @@
 # Art API
 Richard Johnston <techpowerawaits@outlook.com>
-
 :base-url: https://art-api-kafs.onrender.com
+ifdef::env-vscode[]
+:base-url: http://localhost:10000
+endif::[]
 
 == About
 This project provides an API for accessing data on various paintings.
