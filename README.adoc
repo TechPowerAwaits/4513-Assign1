@@ -26,7 +26,7 @@ The aim of the original project was learning how to use Supabase alongside NodeJ
 
 == Provided Routes
 
-All data provided is in JSON.
+NOTE: All data provided is in JSON.
 
 |===
 | Route | Description
@@ -46,6 +46,10 @@ Contains `galleryId`, `galleryName`, `galleryNativeName`, `galleryCity`, `galler
 | /api/galleries/country/_substring_
 | Returns all the galleries in the country starting with the given _substring_.
 Contains `galleryId`, `galleryName`, `galleryNativeName`, `galleryCity`, `galleryAddress`, `galleryCountry`, `latitude`, `longitude`, `galleryWebSite`, `flickrPlaceId`, `yahooWoeId`, and `googlePlaceId` when _substring_ results in a match. Returns an error otherwise.
+
+| /api/artists
+| Returns all the artists.
+Contains `artistId`, `firstName`, `lastName`, `nationality`, `gender`, `yearOfBirth`, `yearOfDeath`, `details`, and `artistLink`.
 |===
 
 == Test Links
@@ -72,4 +76,8 @@ Contains `galleryId`, `galleryName`, `galleryNativeName`, `galleryCity`, `galler
 | Returns all the galleries based in a country starting with "fra".
 | {base-url}/api/galleries/country/not
 | Returns an error since there are no galleries based in a country starting with "not".
+
+2+^| */api/artists*
+| {base-url}/api/artists
+| Returns all the artists.
 |===
