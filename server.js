@@ -1,74 +1,10 @@
 import express from "express";
-import { createClient } from "@supabase/supabase-js";
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_KEY
-);
+import { setApiRoutes } from "./api.mjs";
+
 const app = express();
 
 const apiRouter = express.Router();
-
-import { setError } from "./error.mjs";
-
-apiRouter.get("/eras", async (req, resp) => {
-  const { data, error } = await supabase
-    .from("Eras")
-    .select("eraId, eraName, eraYears");
-
-  if (error) {
-    console.error(error);
-    resp.status(500).send(setError(error));
-  } else {
-    resp.send(data);
-  }
-});
-
-apiRouter.get("/galleries", async (req, resp) => {
-  const { data, error } = await supabase
-    .from("Galleries")
-    .select(
-      "galleryId, galleryName, galleryNativeName, galleryCity, galleryAddress, galleryCountry, latitude, longitude, galleryWebSite, flickrPlaceId, yahooWoeId, googlePlaceId"
-    );
-
-  if (error) {
-    console.error(error);
-    resp.status(500).send(setError(error));
-  } else {
-    resp.send(data);
-  }
-});
-
-apiRouter.get("/galleries/:ref", async (req, resp) => {
-  const { data, error } = await supabase
-    .from("Galleries")
-    .select(
-      "galleryId, galleryName, galleryNativeName, galleryCity, galleryAddress, galleryCountry, latitude, longitude, galleryWebSite, flickrPlaceId, yahooWoeId, googlePlaceId"
-    )
-    .eq("galleryId", req.params.ref);
-
-  if (error) {
-    console.error(error);
-    resp.status(500).send(setError(error));
-  } else {
-    resp.send(data);
-  }
-});
-
-apiRouter.get("/galleries/country/:substring", async (req, resp) => {
-  const { data, error } = await supabase
-    .from("Galleries")
-    .select(
-      "galleryId, galleryName, galleryNativeName, galleryCity, galleryAddress, galleryCountry, latitude, longitude, galleryWebSite, flickrPlaceId, yahooWoeId, googlePlaceId"
-    )
-    .ilike("galleryCountry", `${req.params.substring}%`);
-
-  if (error) {
-    console.error(error);
-    resp.status(500).send(setError(error));
-  } else {
-    resp.send(data);
-  }
-});
+await setApiRoutes(apiRouter);
 
 app.use("/api", apiRouter);
 
