@@ -8,6 +8,8 @@ const app = express();
 
 const apiRouter = express.Router();
 
+import { setError } from "./error.mjs";
+
 apiRouter.get("/eras", async (req, resp) => {
   const { data, error } = await supabase
     .from("Eras")
@@ -15,6 +17,7 @@ apiRouter.get("/eras", async (req, resp) => {
 
   if (error) {
     console.error(error);
+    resp.status(500).send(setError(error));
   } else {
     resp.send(data);
   }
@@ -29,6 +32,7 @@ apiRouter.get("/galleries", async (req, resp) => {
 
   if (error) {
     console.error(error);
+    resp.status(500).send(setError(error));
   } else {
     resp.send(data);
   }
@@ -44,6 +48,7 @@ apiRouter.get("/galleries/:ref", async (req, resp) => {
 
   if (error) {
     console.error(error);
+    resp.status(500).send(setError(error));
   } else {
     resp.send(data);
   }
@@ -59,6 +64,7 @@ apiRouter.get("/galleries/country/:substring", async (req, resp) => {
 
   if (error) {
     console.error(error);
+    resp.status(500).send(setError(error));
   } else {
     resp.send(data);
   }
