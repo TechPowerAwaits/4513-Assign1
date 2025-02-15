@@ -4,7 +4,7 @@
   "description": "Provides JSON data on various paintings and their attributes.",
   "main": "server.js",
   "scripts": {
-    "start": "npm install && npx asciidoctor README.adoc && node server.js",
+    "export-readme": "npx asciidoctor README.adoc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
