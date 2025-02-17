@@ -59,6 +59,12 @@ Contains `artistId`, `firstName`, `lastName`, `nationality`, `gender`, `yearOfBi
 | Returns the artist corresponding to the `artistId` provided in _ref_.
 Contains `artistId`, `firstName`, `lastName`, `nationality`, `gender`, `yearOfBirth`, `yearOfDeath`, `details`, and `artistLink` when ID is valid.
 Returns an error otherwise.
+
+| /api/artists/search/_substring_
+| Returns all the artists whose lastname start with the given substring.
+Contains `artistId`, `firstName`, `lastName`, `nationality`, `gender`, `yearOfBirth`, `yearOfDeath`, `details`, and `artistLink` when _substring_ results in a match.
+Returns an error otherwise.
+
 |===
 
 == Test Links
@@ -97,4 +103,12 @@ Returns an error otherwise.
 | Returns an error since there is no artist with `artistId` of 1223423.
 | {base-url}/api/artists/0
 | Returns an error since there is no artist with `artistId` of 0.
+
+2+^| */api/artists/search/_substring_*
+| {base-url}/api/artists/search/ma
+| Returns all artists whose last names begin with ma.
+| {base-url}/api/artists/search/mA
+| Returns all artists whose last names begin with ma.
+| {base-url}/api/artists/search/na
+| Returns an error since there are no artists whose last names begin with na.
 |===
