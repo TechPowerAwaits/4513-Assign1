@@ -65,6 +65,10 @@ Returns an error otherwise.
 Contains `artistId`, `firstName`, `lastName`, `nationality`, `gender`, `yearOfBirth`, `yearOfDeath`, `details`, and `artistLink` when _substring_ results in a match.
 Returns an error otherwise.
 
+| /api/artists/country/_substring_
+| Returns all the artists whose nationality starts with the given substring.
+Contains `artistId`, `firstName`, `lastName`, `nationality`, `gender`, `yearOfBirth`, `yearOfDeath`, `details`, and `artistLink` when _substring_ results in a match.
+Returns an error otherwise.
 |===
 
 == Test Links
@@ -111,4 +115,10 @@ Returns an error otherwise.
 | Returns all artists whose last names begin with ma.
 | {base-url}/api/artists/search/na
 | Returns an error since there are no artists whose last names begin with na.
+
+2+^| */api/artists/country/_substring_*
+| {base-url}/api/artists/country/fra
+| Returns all artists whose nationality begins with fra.
+| {base-url}/api/artists/country/not
+| Returns an error since there are no artists whose nationality begin with not.
 |===

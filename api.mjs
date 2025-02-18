@@ -78,6 +78,17 @@ async function setApiRoutes(router) {
 
     handleQueryResults(resp, data, error);
   });
+
+  router.get("/artists/country/:substring", async (req, resp) => {
+    const { data, error } = await supabase
+      .from("Artists")
+      .select(
+        "artistId, firstName, lastName, nationality, gender, yearOfBirth, yearOfDeath, details, artistLink"
+      )
+      .ilike("nationality", `${req.params.substring}%`);
+
+    handleQueryResults(resp, data, error);
+  });
 }
 
 /*
