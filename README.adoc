@@ -1,5 +1,6 @@
 # Art API
 Richard Johnston <techpowerawaits@outlook.com>
+:source-highlighter: highlight.js
 :base-url: https://art-api-kafs.onrender.com
 ifdef::env-vscode[]
 :base-url: http://localhost:10000
@@ -26,49 +27,70 @@ The assignment information can be found at: https://github.com/mru-comp4513-arch
 Thanks to https://randyconnolly.com/[Randy Connolly] for proving the assignment.
 The aim of the original project was learning how to use Supabase alongside NodeJS to create a simple API.
 
-== Provided Routes
+== Data
+
+=== Tables
+
+|===
+| Table | Fields
+
+| Artists
+| `artistId`, `firstName`, `lastName`, `nationality`, `gender`, `yearOfBirth`, `yearOfDeath`, `details`, `artistLink`
+
+| Eras
+| `eraId`, `eraName`, `eraYears`
+
+| Galleries
+| `galleryId`, `galleryName`, `galleryNativeName`, `galleryCity`, `galleryAddress`, `galleryCountry`, `latitude`, `longitude`, `galleryWebSite`, `flickrPlaceId`, `yahooWoeId`, `googlePlaceId`
+
+| Genres
+| `genreId`, `genreName` `Eras(...)`, `description`, `wikiLink`
+
+| PaintingGenres
+| `paintingGenreId`, `paintingId`, `genreId`
+
+| Paintings
+| `paintingId`, `Artists(...)`, `Galleries(...)`, `imageFileName`, `title`, `Shapes(...)`, `museumLink`, `accessionNumber`, `copyrightText`, `description`, `excerpt`, `yearOfWork`, `width`, `height`, `medium`, `cost`, `MSRP`, `googleLink`, `googleDescription`, `wikiLink`, `jsonAnnotations`
+
+| Shapes
+| `shapeId`, `shapeName`
+|===
+
+=== Routes
 
 NOTE: All data provided is in JSON.
+
+IMPORTANT: If a parameter passed does not result in a record being found, an error will be returned.
+All errors are of the form:
+[source, javascript]
+{error: {message: "Error message"}}
 
 |===
 | Route | Description
 
 | /api/eras
-| Returns all the eras for paintings.
-Contains `eraId`, `eraName`, and `eraYears`.
+| Returns all data from `Eras`.
 
 | /api/galleries
-| Returns all the galleries containing paintings.
-Contains `galleryId`, `galleryName`, `galleryNativeName`, `galleryCity`, `galleryAddress`, `galleryCountry`, `latitude`, `longitude`, `galleryWebSite`, `flickrPlaceId`, `yahooWoeId`, and `googlePlaceId`.
+| Returns all data from `Galleries`.
 
 | /api/galleries/_ref_
-| Returns the gallery corresponding to the `galleryId` provided in _ref_.
-Contains `galleryId`, `galleryName`, `galleryNativeName`, `galleryCity`, `galleryAddress`, `galleryCountry`, `latitude`, `longitude`, `galleryWebSite`, `flickrPlaceId`, `yahooWoeId`, and `googlePlaceId` when ID is valid.
-Returns an error otherwise.
+| Returns the record from `Galleries` corresponding to the `galleryId` provided in _ref_.
 
 | /api/galleries/country/_substring_
-| Returns all the galleries in the country starting with the given _substring_.
-Contains `galleryId`, `galleryName`, `galleryNativeName`, `galleryCity`, `galleryAddress`, `galleryCountry`, `latitude`, `longitude`, `galleryWebSite`, `flickrPlaceId`, `yahooWoeId`, and `googlePlaceId` when _substring_ results in a match.
-Returns an error otherwise.
+| Returns the records from `Galleries` with a `galleryCountry` starting with the given _substring_.
 
 | /api/artists
-| Returns all the artists.
-Contains `artistId`, `firstName`, `lastName`, `nationality`, `gender`, `yearOfBirth`, `yearOfDeath`, `details`, and `artistLink`.
+| Returns all data from `Artists`.
 
 | /api/artists/_ref_
-| Returns the artist corresponding to the `artistId` provided in _ref_.
-Contains `artistId`, `firstName`, `lastName`, `nationality`, `gender`, `yearOfBirth`, `yearOfDeath`, `details`, and `artistLink` when ID is valid.
-Returns an error otherwise.
+| Returns the record from `Artists` corresponding to the `artistId` provided in _ref_.
 
 | /api/artists/search/_substring_
-| Returns all the artists whose lastname start with the given substring.
-Contains `artistId`, `firstName`, `lastName`, `nationality`, `gender`, `yearOfBirth`, `yearOfDeath`, `details`, and `artistLink` when _substring_ results in a match.
-Returns an error otherwise.
+| Returns the records from `Artists` with a `lastName` starting with the given _substring_.
 
 | /api/artists/country/_substring_
-| Returns all the artists whose nationality starts with the given substring.
-Contains `artistId`, `firstName`, `lastName`, `nationality`, `gender`, `yearOfBirth`, `yearOfDeath`, `details`, and `artistLink` when _substring_ results in a match.
-Returns an error otherwise.
+| Returns the records from `Artists` with a `nationality` starting with the given _substring_.
 |===
 
 == Test Links
