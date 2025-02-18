@@ -7,10 +7,66 @@ const supabase = createClient(
 );
 
 async function setApiRoutes(router) {
+  const eraFields = `
+    eraId,
+    eraName,
+    eraYears
+  `;
+  const galleryFields = `
+    galleryId,
+    galleryName,
+    galleryNativeName,
+    galleryCity,
+    galleryAddress,
+    galleryCountry,
+    latitude,
+    longitude,
+    galleryWebSite,
+    flickrPlaceId,
+    yahooWoeId,
+    googlePlaceId
+  `;
+  const artistFields = `
+    artistId,
+    firstName,
+    lastName,
+    nationality,
+    gender,
+    yearOfBirth,
+    yearOfDeath,
+    details,
+    artistLink
+  `;
+  const shapeFields = `
+    shapeId,
+    shapeName
+  `;
+  const paintingFields = `
+    paintingId,
+    Artists!inner(${artistFields}),
+    Galleries!inner(${galleryFields}),
+    imageFileName,
+    title,
+    Shapes!inner(${shapeFields}),
+    museumLink,
+    accessionNumber,
+    copyrightText,
+    description,
+    excerpt,
+    yearOfWork,
+    width,
+    height,
+    medium,
+    cost,
+    MSRP,
+    googleLink,
+    googleDescription,
+    wikiLink,
+    jsonAnnotations
+  `;
+
   router.get("/eras", async (req, resp) => {
-    const { data, error } = await supabase
-      .from("Eras")
-      .select("eraId, eraName, eraYears");
+    const { data, error } = await supabase.from("Eras").select(`${eraFields}`);
 
     handleQueryResults(resp, data, error);
   });
@@ -18,9 +74,7 @@ async function setApiRoutes(router) {
   router.get("/galleries", async (req, resp) => {
     const { data, error } = await supabase
       .from("Galleries")
-      .select(
-        "galleryId, galleryName, galleryNativeName, galleryCity, galleryAddress, galleryCountry, latitude, longitude, galleryWebSite, flickrPlaceId, yahooWoeId, googlePlaceId"
-      );
+      .select(`${galleryFields}`);
 
     handleQueryResults(resp, data, error);
   });
@@ -28,9 +82,7 @@ async function setApiRoutes(router) {
   router.get("/galleries/:ref", async (req, resp) => {
     const { data, error } = await supabase
       .from("Galleries")
-      .select(
-        "galleryId, galleryName, galleryNativeName, galleryCity, galleryAddress, galleryCountry, latitude, longitude, galleryWebSite, flickrPlaceId, yahooWoeId, googlePlaceId"
-      )
+      .select(`${galleryFields}`)
       .eq("galleryId", req.params.ref);
 
     handleQueryResults(resp, data, error);
@@ -39,9 +91,7 @@ async function setApiRoutes(router) {
   router.get("/galleries/country/:substring", async (req, resp) => {
     const { data, error } = await supabase
       .from("Galleries")
-      .select(
-        "galleryId, galleryName, galleryNativeName, galleryCity, galleryAddress, galleryCountry, latitude, longitude, galleryWebSite, flickrPlaceId, yahooWoeId, googlePlaceId"
-      )
+      .select(`${galleryFields}`)
       .ilike("galleryCountry", `${req.params.substring}%`);
 
     handleQueryResults(resp, data, error);
@@ -50,9 +100,7 @@ async function setApiRoutes(router) {
   router.get("/artists", async (req, resp) => {
     const { data, error } = await supabase
       .from("Artists")
-      .select(
-        "artistId, firstName, lastName, nationality, gender, yearOfBirth, yearOfDeath, details, artistLink"
-      );
+      .select(`${artistFields}`);
 
     handleQueryResults(resp, data, error);
   });
@@ -60,9 +108,7 @@ async function setApiRoutes(router) {
   router.get("/artists/:ref", async (req, resp) => {
     const { data, error } = await supabase
       .from("Artists")
-      .select(
-        "artistId, firstName, lastName, nationality, gender, yearOfBirth, yearOfDeath, details, artistLink"
-      )
+      .select(`${artistFields}`)
       .eq("artistId", req.params.ref);
 
     handleQueryResults(resp, data, error);
@@ -71,9 +117,7 @@ async function setApiRoutes(router) {
   router.get("/artists/search/:substring", async (req, resp) => {
     const { data, error } = await supabase
       .from("Artists")
-      .select(
-        "artistId, firstName, lastName, nationality, gender, yearOfBirth, yearOfDeath, details, artistLink"
-      )
+      .select(`${artistFields}`)
       .ilike("lastName", `${req.params.substring}%`);
 
     handleQueryResults(resp, data, error);
@@ -82,10 +126,16 @@ async function setApiRoutes(router) {
   router.get("/artists/country/:substring", async (req, resp) => {
     const { data, error } = await supabase
       .from("Artists")
-      .select(
-        "artistId, firstName, lastName, nationality, gender, yearOfBirth, yearOfDeath, details, artistLink"
-      )
+      .select(`${artistFields}`)
       .ilike("nationality", `${req.params.substring}%`);
+
+    handleQueryResults(resp, data, error);
+  });
+
+  router.get("/paintings", async (req, resp) => {
+    const { data, error } = await supabase
+      .from("Paintings")
+      .select(`${paintingFields}`);
 
     handleQueryResults(resp, data, error);
   });

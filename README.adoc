@@ -91,6 +91,9 @@ All errors are of the form:
 
 | /api/artists/country/_substring_
 | Returns the records from `Artists` with a `nationality` starting with the given _substring_.
+
+| /api/paintings
+| Returns all data from `Paintings`.
 |===
 
 == Test Links
@@ -143,4 +146,8 @@ All errors are of the form:
 | Returns all artists whose nationality begins with fra.
 | {base-url}/api/artists/country/not
 | Returns an error since there are no artists whose nationality begin with not.
+
+2+^| */api/paintings*
+| {base-url}/api/paintings
+| Returns all paintings.
 |===
