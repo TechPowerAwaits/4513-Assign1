@@ -6,6 +6,7 @@ import { handleQueryResults } from "./RouteCommon.mjs";
 import { fields as artistFields } from "./Artists.mjs";
 import { fields as galleryFields } from "./Galleries.mjs";
 import { fields as shapeFields } from "./Shapes.mjs";
+import { ErrorMsg } from "../ErrorMsg.mjs";
 
 /*
  * Purpose: Provides the names of all the fields in the Paintings table.
@@ -68,12 +69,27 @@ async function setRoutes(supabase, router) {
   });
 
   router.get("/search/:substring", async (req, resp) => {
-    const { data, error } = await getData().ilike(
-      "title",
-      `%${req.params.substring}%`
-    );
+    const { data, error } = await getData()
+      .ilike("title", `%${req.params.substring}%`)
+      .order("title");
 
     handleQueryResults(resp, data, error);
+  });
+
+  router.get("/years/:start/:end", async (req, resp) => {
+    const startNum = parseInt(req.params.start);
+    const endNum = parseInt(req.params.end);
+
+    if (startNum != NaN && endNum != NaN && endNum >= startNum) {
+      const { data, error } = await getData()
+        .gte("yearOfWork", startNum)
+        .lte("yearOfWork", endNum)
+        .order("yearOfWork");
+
+      handleQueryResults(resp, data, error);
+    } else {
+      resp.status(400).send(new ErrorMsg("Provided range is malformed."));
+    }
   });
 
   /*
