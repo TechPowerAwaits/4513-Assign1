@@ -41,7 +41,7 @@ function handleQueryResults(resp, data, error = null) {
  * Details: The parameter will be stored as an integer within resp.intParams.
  */
 function enforceParamInteger(router, paramName) {
-  const regex = /^\d+$/;
+  const regex = /^-?\d+$/;
   router.param(paramName, (req, resp, next, value) => {
     if (regex.test(value)) {
       if (!req.intParams) {
