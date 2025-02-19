@@ -129,6 +129,7 @@ Sorted by `title`.
 
 | /api/genres/painting/_ref_
 | Returns the records from `Genres` which are associated with the given `paintingId` _ref_.
+Sorted by `genreName`.
 |===
 
 == Test Links
