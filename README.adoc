@@ -116,6 +116,9 @@ Sorted by `title`.
 | /api/paintings/artist/_ref_
 | Returns the records from `Paintings` with a `artistId` corresponding to _ref_.
 Sorted by `title`.
+
+| /api/paintings/artists/country/_substring_
+| Returns the records from `Paintings` whose artist has a `nationality` starting with the given _substring_.
 |===
 
 == Test Links
@@ -250,4 +253,10 @@ Sorted by `title`.
 | Returns an error since 16.5 is not a valid integer.
 | {base-url}/api/paintings/artist/a
 | Returns an error since 'a' is not a valid integer.
+
+2+^| */api/paintings/artists/country/_substring_*
+| {base-url}/api/paintings/artists/country/ital
+| Returns all paintings whose artist has a nationality starting with "ital".
+| {base-url}/api/paintings/artists/country/not
+| Returns an error since no artists have a nationality starting with "not".
 |===

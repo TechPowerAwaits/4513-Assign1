@@ -109,6 +109,14 @@ async function setRoutes(supabase, router) {
     handleQueryResults(resp, data, error);
   });
 
+  router.get("/artists/country/:substring", async (req, resp) => {
+    const { data, error } = await getData()
+      .ilike("Artists.nationality", `${req.params.substring}%`)
+      .order("title");
+
+    handleQueryResults(resp, data, error);
+  });
+
   /*
    * Purpose: Retrieves a promise for Paintings data.
    */
