@@ -2,7 +2,11 @@
  * Purpose: To form routes for Paintings data.
  */
 
-import { enforceParamInteger, handleQueryResults } from "./RouteCommon.mjs";
+import {
+  appendTableRefs,
+  enforceParamInteger,
+  handleQueryResults,
+} from "./RouteCommon.mjs";
 import { fields as artistFields } from "./Artists.mjs";
 import { fields as galleryFields } from "./Galleries.mjs";
 import { fields as shapeFields } from "./Shapes.mjs";
@@ -120,8 +124,10 @@ async function setRoutes(supabase, router) {
   /*
    * Purpose: Retrieves a promise for Paintings data.
    */
-  function getData() {
-    return supabase.from("Paintings").select(fields);
+  function getData(...tableRefs) {
+    return supabase
+      .from("Paintings")
+      .select(appendTableRefs(fields, tableRefs));
   }
 }
 

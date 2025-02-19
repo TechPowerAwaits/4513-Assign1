@@ -2,7 +2,7 @@
  * Purpose: To form routes for Shapes data.
  */
 
-import { handleQueryResults } from "./RouteCommon.mjs";
+import { appendTableRefs, handleQueryResults } from "./RouteCommon.mjs";
 
 /*
  * Purpose: Provides the names of all the fields in the Shapes table.
@@ -26,8 +26,8 @@ async function setRoutes(supabase, router) {
   /*
    * Purpose: Retrieves a promise for Shapes data.
    */
-  function getData() {
-    return supabase.from("Shapes").select(fields);
+  function getData(...tableRefs) {
+    return supabase.from("Shapes").select(appendTableRefs(fields, tableRefs));
   }
 }
 

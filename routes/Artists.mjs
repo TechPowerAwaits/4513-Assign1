@@ -2,7 +2,11 @@
  * Purpose: To form routes for Artists data.
  */
 
-import { enforceParamInteger, handleQueryResults } from "./RouteCommon.mjs";
+import {
+  appendTableRefs,
+  enforceParamInteger,
+  handleQueryResults,
+} from "./RouteCommon.mjs";
 
 /*
  * Purpose: Provides the names of all the fields in the Artists table.
@@ -63,8 +67,8 @@ async function setRoutes(supabase, router) {
   /*
    * Purpose: Retrieves a promise for Artists data.
    */
-  function getData() {
-    return supabase.from("Artists").select(fields);
+  function getData(...tableRefs) {
+    return supabase.from("Artists").select(appendTableRefs(fields, tableRefs));
   }
 }
 
