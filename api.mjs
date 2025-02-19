@@ -1,166 +1,63 @@
-import { ErrorMsg, errorMessages } from "./ErrorMsg.mjs";
+/*
+ * Purpose: To handle all API routes.
+ */
 
 import { createClient } from "@supabase/supabase-js";
+import { Router } from "express";
+
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_KEY
 );
 
-async function setApiRoutes(router) {
-  const eraFields = `
-    eraId,
-    eraName,
-    eraYears
-  `;
-  const galleryFields = `
-    galleryId,
-    galleryName,
-    galleryNativeName,
-    galleryCity,
-    galleryAddress,
-    galleryCountry,
-    latitude,
-    longitude,
-    galleryWebSite,
-    flickrPlaceId,
-    yahooWoeId,
-    googlePlaceId
-  `;
-  const artistFields = `
-    artistId,
-    firstName,
-    lastName,
-    nationality,
-    gender,
-    yearOfBirth,
-    yearOfDeath,
-    details,
-    artistLink
-  `;
-  const shapeFields = `
-    shapeId,
-    shapeName
-  `;
-  const paintingFields = `
-    paintingId,
-    Artists!inner(${artistFields}),
-    Galleries!inner(${galleryFields}),
-    imageFileName,
-    title,
-    Shapes!inner(${shapeFields}),
-    museumLink,
-    accessionNumber,
-    copyrightText,
-    description,
-    excerpt,
-    yearOfWork,
-    width,
-    height,
-    medium,
-    cost,
-    MSRP,
-    googleLink,
-    googleDescription,
-    wikiLink,
-    jsonAnnotations
-  `;
+/*
+ * Purpose: To set up routes using the functionality of modules located in a
+ * certain path.
+ */
+class APIRouteSetter {
+  constructor(moduleName, routePath) {
+    this.moduleName = moduleName;
+    this.path = routePath;
+    this.router = Router();
+  }
 
-  router.get("/eras", async (req, resp) => {
-    const { data, error } = await supabase.from("Eras").select(`${eraFields}`);
-
-    handleQueryResults(resp, data, error);
-  });
-
-  router.get("/galleries", async (req, resp) => {
-    const { data, error } = await supabase
-      .from("Galleries")
-      .select(`${galleryFields}`);
-
-    handleQueryResults(resp, data, error);
-  });
-
-  router.get("/galleries/:ref", async (req, resp) => {
-    const { data, error } = await supabase
-      .from("Galleries")
-      .select(`${galleryFields}`)
-      .eq("galleryId", req.params.ref);
-
-    handleQueryResults(resp, data, error);
-  });
-
-  router.get("/galleries/country/:substring", async (req, resp) => {
-    const { data, error } = await supabase
-      .from("Galleries")
-      .select(`${galleryFields}`)
-      .ilike("galleryCountry", `${req.params.substring}%`);
-
-    handleQueryResults(resp, data, error);
-  });
-
-  router.get("/artists", async (req, resp) => {
-    const { data, error } = await supabase
-      .from("Artists")
-      .select(`${artistFields}`);
-
-    handleQueryResults(resp, data, error);
-  });
-
-  router.get("/artists/:ref", async (req, resp) => {
-    const { data, error } = await supabase
-      .from("Artists")
-      .select(`${artistFields}`)
-      .eq("artistId", req.params.ref);
-
-    handleQueryResults(resp, data, error);
-  });
-
-  router.get("/artists/search/:substring", async (req, resp) => {
-    const { data, error } = await supabase
-      .from("Artists")
-      .select(`${artistFields}`)
-      .ilike("lastName", `${req.params.substring}%`);
-
-    handleQueryResults(resp, data, error);
-  });
-
-  router.get("/artists/country/:substring", async (req, resp) => {
-    const { data, error } = await supabase
-      .from("Artists")
-      .select(`${artistFields}`)
-      .ilike("nationality", `${req.params.substring}%`);
-
-    handleQueryResults(resp, data, error);
-  });
-
-  router.get("/paintings", async (req, resp) => {
-    const { data, error } = await supabase
-      .from("Paintings")
-      .select(`${paintingFields}`);
-
-    handleQueryResults(resp, data, error);
-  });
+  /*
+   * Purpose: To set up routes based on given information.
+   *
+   * Details: If the module does not exist or if the setRoutes() method is not
+   * exported by the module, an Error will occur.
+   */
+  async set() {
+    const apiModule = await import(`./routes/${this.moduleName}.mjs`);
+    apiModule.setRoutes(supabase, this.router);
+  }
 }
+
+const routes = [
+  new APIRouteSetter("Artists", "/artists"),
+  new APIRouteSetter("Eras", "/eras"),
+  new APIRouteSetter("Galleries", "/galleries"),
+  new APIRouteSetter("Genres", "/genres"),
+  new APIRouteSetter("Paintings", "/paintings"),
+  new APIRouteSetter("Shapes", "/shapes"),
+];
 
 /*
- * Purpose: Handles the results of querying for data.
+ * Purpose: Sets up all the API routes.
+ *
+ * Details: If a route fails to set, an error will be printed to the console.
  */
-function handleQueryResults(resp, data, error = null) {
-  if (error) {
-    handleInternalError(resp, error);
-  } else if (data.length == 0) {
-    handleNoDataError(resp);
-  } else {
-    resp.send(data);
-  }
-
-  function handleInternalError(resp, error) {
-    console.error(error);
-    resp.status(500).send(new ErrorMsg(errorMessages["internal"]));
-  }
-
-  function handleNoDataError(resp) {
-    resp.status(404).send(new ErrorMsg(errorMessages["noData"]));
-  }
+async function setRoutes(router) {
+  await Promise.all(
+    routes.map(async (routeSetter) => {
+      try {
+        await routeSetter.set();
+        router.use(routeSetter.path, routeSetter.router);
+      } catch {
+        console.error(`Failed to set API route '${routeSetter.path}'.`);
+      }
+    })
+  );
 }
 
-export { setApiRoutes };
+export { setRoutes };

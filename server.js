@@ -1,5 +1,5 @@
 import express from "express";
-import { setApiRoutes } from "./api.mjs";
+import { setRoutes as setApiRoutes } from "./api.mjs";
 
 const app = express();
 
