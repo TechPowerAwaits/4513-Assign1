@@ -58,6 +58,14 @@ async function setRoutes(supabase, router) {
     handleQueryResults(resp, data, error);
   });
 
+  router.get("/genre/:ref", async (req, resp) => {
+    const { data, error } = await getData(majorFields, "PaintingGenres")
+      .eq("PaintingGenres.genreId", req.intParams.ref)
+      .order("yearOfWork");
+
+    handleQueryResults(resp, data, error);
+  });
+
   /*
    * Purpose: Retrieves a promise for Paintings data.
    */

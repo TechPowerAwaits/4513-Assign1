@@ -130,6 +130,11 @@ Sorted by `title`.
 | /api/genres/painting/_ref_
 | Returns the records from `Genres` which are associated with the given `paintingId` _ref_.
 Sorted by `genreName`.
+
+| /api/paintings/genre/_ref_
+| Returns the records from `Paintings` which are associated with the given `genreId`.
+Only `paintingId`, `title`, and `yearOfWork` are provided.
+Sorted by `yearOfWork`.
 |===
 
 == Test Links
@@ -295,5 +300,15 @@ Sorted by `genreName`.
 | {base-url}/api/genres/painting/408.5
 | Returns an error since 408.5 is not a valid integer.
 | {base-url}/api/genres/painting/a
+| Returns an error since 'a' is not a valid integer.
+
+2+^|*/api/paintings/genre/_ref_*
+| {base-url}/api/paintings/genre/78
+| Returns the paintings associated with a `genreId` of 78.
+| {base-url}/api/paintings/genre/0
+| Returns an error since no paintings is associated with a `genreId` of 0.
+| {base-url}/api/paintings/genre/78.5
+| Returns an error since 78.5 is not a valid integer.
+| {base-url}/api/paintings/genre/a
 | Returns an error since 'a' is not a valid integer.
 |===
