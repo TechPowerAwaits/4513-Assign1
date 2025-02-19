@@ -100,6 +100,9 @@ All errors are of the form:
 
 | /api/paintings/_ref_
 | Returns the record from `Paintings` corresponding to the `paintingId` provided in _ref_.
+
+| /api/paintings/search/_substring_
+| Returns the record from `Paintings` with a `title` containing the given _substring_.
 |===
 
 == Test Links
@@ -168,4 +171,14 @@ All errors are of the form:
 | Returns the painting with `paintingId` of 63.
 | {base-url}/api/paintings/3
 | Returns an error since there is no painting with `paintingId` of 3.
+
+2+^| */api/paintings/search/_substring_*
+| {base-url}/api/paintings/search/port
+| Returns all paintings whose title has the substring "port" in it.
+| {base-url}/api/paintings/search/pORt
+| Returns all paintings whose title has the substring "port" in it.
+| {base-url}/api/paintings/search/connolly
+| Returns an error since there are no paintings whose title has the substring "connolly" in it.
+| {base-url}/api/paintings/search/not
+| Returns an error since there are no paintings whose title has the substring "not" in it.
 |===

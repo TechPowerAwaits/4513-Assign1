@@ -67,6 +67,15 @@ async function setRoutes(supabase, router) {
     handleQueryResults(resp, data, error);
   });
 
+  router.get("/search/:substring", async (req, resp) => {
+    const { data, error } = await getData().ilike(
+      "title",
+      `%${req.params.substring}%`
+    );
+
+    handleQueryResults(resp, data, error);
+  });
+
   /*
    * Purpose: Retrieves a promise for Paintings data.
    */
