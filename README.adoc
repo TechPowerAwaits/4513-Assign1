@@ -97,6 +97,9 @@ All errors are of the form:
 
 | /api/paintings/sort/_title\|year_
 | Returns all data from `Paintings` sorted either by `title` or `yearOfWork`.
+
+| /api/paintings/_ref_
+| Returns the record from `Paintings` corresponding to the `paintingId` provided in _ref_.
 |===
 
 == Test Links
@@ -159,4 +162,10 @@ All errors are of the form:
 | Returns all paintings sorted by `yearOfWork`.
 | {base-url}/api/paintings/sort/title
 | Returns all paintings sorted by `title`.
+
+2+^| */api/paintings/_ref_*
+| {base-url}/api/paintings/63
+| Returns the painting with `paintingId` of 63.
+| {base-url}/api/paintings/3
+| Returns an error since there is no painting with `paintingId` of 3.
 |===

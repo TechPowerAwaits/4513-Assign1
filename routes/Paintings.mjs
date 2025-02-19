@@ -61,6 +61,12 @@ async function setRoutes(supabase, router) {
     handleQueryResults(resp, data, error);
   });
 
+  router.get("/:ref", async (req, resp) => {
+    const { data, error } = await getData().eq("paintingId", req.params.ref);
+
+    handleQueryResults(resp, data, error);
+  });
+
   /*
    * Purpose: Retrieves a promise for Paintings data.
    */
