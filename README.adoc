@@ -112,6 +112,10 @@ Sorted by `yearOfWork`.
 | /api/paintings/galleries/_ref_
 | Returns the records from `Paintings` with a `galleryId` corresponding to _ref_.
 Sorted by `title`.
+
+| /api/paintings/artist/_ref_
+| Returns the records from `Paintings` with a `artistId` corresponding to _ref_.
+Sorted by `title`.
 |===
 
 == Test Links
@@ -233,5 +237,17 @@ Sorted by `title`.
 | {base-url}/api/paintings/galleries/5.5
 | Returns an error since 5.5 is not a valid integer.
 | {base-url}/api/paintings/galleries/a
+| Returns an error since 'a' is not a valid integer.
+
+2+^| */api/paintings/artist/_ref_*
+| {base-url}/api/paintings/artist/16
+| Returns all paintings whose `artistId` is 16.
+| {base-url}/api/paintings/artist/666
+| Returns an error since there are no paintings with `artistId` of 666.
+| {base-url}/api/paintings/artist/0
+| Returns an error since there are no paintings with `artistId` of 0.
+| {base-url}/api/paintings/artist/16.5
+| Returns an error since 16.5 is not a valid integer.
+| {base-url}/api/paintings/artist/a
 | Returns an error since 'a' is not a valid integer.
 |===

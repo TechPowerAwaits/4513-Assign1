@@ -101,6 +101,14 @@ async function setRoutes(supabase, router) {
     handleQueryResults(resp, data, error);
   });
 
+  router.get("/artist/:ref", async (req, resp) => {
+    const { data, error } = await getData()
+      .eq("artistId", req.intParams.ref)
+      .order("title");
+
+    handleQueryResults(resp, data, error);
+  });
+
   /*
    * Purpose: Retrieves a promise for Paintings data.
    */
