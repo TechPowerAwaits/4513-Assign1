@@ -35,4 +35,27 @@ function handleQueryResults(resp, data, error = null) {
   }
 }
 
-export { handleQueryResults };
+/*
+ * Purpose: Produces an error if the named parameter is not integral.
+ *
+ * Details: The parameter will be stored as an integer within resp.intParams.
+ */
+function enforceParamInteger(router, paramName) {
+  const regex = /^\d+$/;
+  router.param(paramName, (req, resp, next, value) => {
+    if (regex.test(value)) {
+      if (!req.intParams) {
+        req.intParams = {};
+      }
+
+      req.intParams[paramName] = Number.parseInt(value);
+      next();
+    } else {
+      resp
+        .status(400)
+        .send(new ErrorMsg(`Parameter '${paramName}' is not an integer.`));
+    }
+  });
+}
+
+export { enforceParamInteger, handleQueryResults };

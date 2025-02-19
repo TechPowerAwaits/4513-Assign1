@@ -2,7 +2,7 @@
  * Purpose: To form routes for Paintings data.
  */
 
-import { handleQueryResults } from "./RouteCommon.mjs";
+import { enforceParamInteger, handleQueryResults } from "./RouteCommon.mjs";
 import { fields as artistFields } from "./Artists.mjs";
 import { fields as galleryFields } from "./Galleries.mjs";
 import { fields as shapeFields } from "./Shapes.mjs";
@@ -44,6 +44,10 @@ const fields = `
  * Paintings table.
  */
 async function setRoutes(supabase, router) {
+  enforceParamInteger(router, "ref");
+  enforceParamInteger(router, "start");
+  enforceParamInteger(router, "end");
+
   router.get("/", async (req, resp) => {
     const { data, error } = await getData();
 
@@ -63,7 +67,7 @@ async function setRoutes(supabase, router) {
   });
 
   router.get("/:ref", async (req, resp) => {
-    const { data, error } = await getData().eq("paintingId", req.params.ref);
+    const { data, error } = await getData().eq("paintingId", req.intParams.ref);
 
     handleQueryResults(resp, data, error);
   });
@@ -77,13 +81,10 @@ async function setRoutes(supabase, router) {
   });
 
   router.get("/years/:start/:end", async (req, resp) => {
-    const startNum = parseInt(req.params.start);
-    const endNum = parseInt(req.params.end);
-
-    if (startNum != NaN && endNum != NaN && endNum >= startNum) {
+    if (req.intParams.end >= req.intParams.start) {
       const { data, error } = await getData()
-        .gte("yearOfWork", startNum)
-        .lte("yearOfWork", endNum)
+        .gte("yearOfWork", req.intParams.start)
+        .lte("yearOfWork", req.intParams.end)
         .order("yearOfWork");
 
       handleQueryResults(resp, data, error);

@@ -2,7 +2,7 @@
  * Purpose: To form routes for Artists data.
  */
 
-import { handleQueryResults } from "./RouteCommon.mjs";
+import { enforceParamInteger, handleQueryResults } from "./RouteCommon.mjs";
 
 /*
  * Purpose: Provides the names of all the fields in the Artists table.
@@ -28,6 +28,8 @@ const fields = `
  * Artists table.
  */
 async function setRoutes(supabase, router) {
+  enforceParamInteger(router, "ref");
+
   router.get("/", async (req, resp) => {
     const { data, error } = await getData();
 
@@ -35,7 +37,7 @@ async function setRoutes(supabase, router) {
   });
 
   router.get("/:ref", async (req, resp) => {
-    const { data, error } = await getData().eq("artistId", req.params.ref);
+    const { data, error } = await getData().eq("artistId", req.intParams.ref);
 
     handleQueryResults(resp, data, error);
   });

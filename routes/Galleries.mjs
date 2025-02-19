@@ -2,7 +2,7 @@
  * Purpose: To form routes for Galleries data.
  */
 
-import { handleQueryResults } from "./RouteCommon.mjs";
+import { enforceParamInteger, handleQueryResults } from "./RouteCommon.mjs";
 
 /*
  * Purpose: Provides the names of all the fields in the Galleries table.
@@ -31,6 +31,8 @@ const fields = `
  * Galleries table.
  */
 async function setRoutes(supabase, router) {
+  enforceParamInteger(router, "ref");
+
   router.get("/", async (req, resp) => {
     const { data, error } = await getData();
 
@@ -38,7 +40,7 @@ async function setRoutes(supabase, router) {
   });
 
   router.get("/:ref", async (req, resp) => {
-    const { data, error } = await getData().eq("galleryId", req.params.ref);
+    const { data, error } = await getData().eq("galleryId", req.intParams.ref);
 
     handleQueryResults(resp, data, error);
   });

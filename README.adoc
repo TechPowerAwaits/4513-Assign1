@@ -126,6 +126,10 @@ All errors are of the form:
 | Returns the gallery with `galleryId` of 30.
 | {base-url}/api/galleries/1
 | Returns an error since there is no gallery with `galleryId` of 1.
+| {base-url}/api/galleries/30.5
+| Returns an error since 30.5 is not a valid integer.
+| {base-url}/api/galleries/a
+| Returns an error since 'a' is not a valid integer.
 
 2+^| */api/galleries/country/_substring_*
 | {base-url}/api/galleries/country/fra
@@ -144,6 +148,10 @@ All errors are of the form:
 | Returns an error since there is no artist with `artistId` of 1223423.
 | {base-url}/api/artists/0
 | Returns an error since there is no artist with `artistId` of 0.
+| {base-url}/api/artists/12.5
+| Returns an error since 12.5 is not a valid integer.
+| {base-url}/api/artists/a
+| Returns an error since 'a' is not a valid integer.
 
 2+^| */api/artists/search/_substring_*
 | {base-url}/api/artists/search/ma
@@ -174,6 +182,10 @@ All errors are of the form:
 | Returns the painting with `paintingId` of 63.
 | {base-url}/api/paintings/3
 | Returns an error since there is no painting with `paintingId` of 3.
+| {base-url}/api/paintings/63.5
+| Returns an error since 63.5 is not a valid integer.
+| {base-url}/api/paintings/a
+| Returns an error since 'a' is not a valid integer.
 
 2+^| */api/paintings/search/_substring_*
 | {base-url}/api/paintings/search/port
@@ -188,12 +200,22 @@ All errors are of the form:
 2+^| */api/paintings/years/_start_/_end_*
 | {base-url}/api/paintings/years/1800/1850
 | Returns all paintings whose `yearOfWork` is between 1800 and 1850 (inclusive).
-| {base-url}/api/paintings/years/a/b
-| Returns an error since that is not a valid year range.
 | {base-url}/api/paintings/years/1800/1800
 | Returns all paintings whose `yearOfWork` is 1800.
 | {base-url}/api/paintings/years/0/1
 | Returns an error since there are no paintings whose `yearOfWork` is contained within that range.
 | {base-url}/api/paintings/years/1850/1800
 | Returns an error since that is not a valid year range.
+| {base-url}/api/paintings/years/a/1850
+| Returns an error since 'a' is not a valid integer.
+| {base-url}/api/paintings/years/1800/b
+| Returns an error since 'b' is not a valid integer.
+| {base-url}/api/paintings/years/1800.5/1850
+| Returns an error since 1800.5 is not a valid integer.
+| {base-url}/api/paintings/years/1800/1850.5
+| Returns an error since 1850.5 is not a valid integer.
+| {base-url}/api/paintings/years/a/b
+| Returns an error since neither 'a' nor 'b' are valid integers.
+| {base-url}/api/paintings/years/1800.5/1850.5
+| Returns an error since neither 1800.5 nor 1850.5 are valid integers.
 |===
