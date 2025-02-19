@@ -103,9 +103,15 @@ All errors are of the form:
 
 | /api/paintings/search/_substring_
 | Returns the record from `Paintings` with a `title` containing the given _substring_.
+Sorted by `title`.
 
 | /api/paintings/years/_start_/_end_
 | Returns the records from `Paintings` whose `yearOfWork` is between the given _start_ and _end_ year (inclusive).
+Sorted by `yearOfWork`.
+
+| /api/paintings/galleries/_ref_
+| Returns the records from `Paintings` with a `galleryId` corresponding to _ref_.
+Sorted by `title`.
 |===
 
 == Test Links
@@ -218,4 +224,14 @@ All errors are of the form:
 | Returns an error since neither 'a' nor 'b' are valid integers.
 | {base-url}/api/paintings/years/1800.5/1850.5
 | Returns an error since neither 1800.5 nor 1850.5 are valid integers.
+
+2+^| */api/paintings/galleries/_ref_*
+| {base-url}/api/paintings/galleries/5
+| Returns all paintings whose `galleryId` is 5.
+| {base-url}/api/paintings/galleries/1
+| Returns an error since there are no paintings with `galleryId` of 1.
+| {base-url}/api/paintings/galleries/5.5
+| Returns an error since 5.5 is not a valid integer.
+| {base-url}/api/paintings/galleries/a
+| Returns an error since 'a' is not a valid integer.
 |===
