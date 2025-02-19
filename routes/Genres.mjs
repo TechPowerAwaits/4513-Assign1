@@ -25,7 +25,11 @@ const fields = `
  * Genres table.
  */
 async function setRoutes(supabase, router) {
-  // TODO
+  router.get("/", async (req, resp) => {
+    const { data, error } = await getData();
+
+    handleQueryResults(resp, data, error);
+  });
 
   /*
    * Purpose: Retrieves a promise for Genres data.
