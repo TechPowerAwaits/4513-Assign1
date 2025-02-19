@@ -126,6 +126,9 @@ Sorted by `title`.
 
 | /api/genres/_ref_
 | Returns the record from `Genres` corresponding to the `genreId` provided in _ref_.
+
+| /api/genres/painting/_ref_
+| Returns the records from `Genres` which are associated with the given `paintingId` _ref_.
 |===
 
 == Test Links
@@ -279,5 +282,17 @@ Sorted by `title`.
 | {base-url}/api/genres/76.5
 | Returns an error since 76.5 is not a valid integer.
 | {base-url}/api/genres/a
+| Returns an error since 'a' is not a valid integer.
+
+2+^| */api/genres/painting/_ref_*
+| {base-url}/api/genres/painting/408
+| Returns the genres associated with a `paintingId` of 408.
+| {base-url}/api/genres/painting/jsdfhg
+| Return an error since "jsdfhg" is not a valid integer.
+| {base-url}/api/genres/painting/3
+| Returns an error since no genre is associated with a painting of `paintingId` 3.
+| {base-url}/api/genres/painting/408.5
+| Returns an error since 408.5 is not a valid integer.
+| {base-url}/api/genres/painting/a
 | Returns an error since 'a' is not a valid integer.
 |===

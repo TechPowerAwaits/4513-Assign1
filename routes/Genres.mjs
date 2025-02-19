@@ -2,7 +2,11 @@
  * Purpose: To form routes for Genres data.
  */
 
-import { enforceParamInteger, handleQueryResults } from "./RouteCommon.mjs";
+import {
+  appendTableRefs,
+  enforceParamInteger,
+  handleQueryResults,
+} from "./RouteCommon.mjs";
 import { fields as erasFields } from "./Eras.mjs";
 
 /*
@@ -39,11 +43,19 @@ async function setRoutes(supabase, router) {
     handleQueryResults(resp, data, error);
   });
 
+  router.get("/painting/:ref", async (req, resp) => {
+    const { data, error } = await getData("PaintingGenres")
+      .eq("PaintingGenres.paintingId", req.intParams.ref)
+      .order("genreName", { ascending: true });
+
+    handleQueryResults(resp, data, error);
+  });
+
   /*
    * Purpose: Retrieves a promise for Genres data.
    */
-  function getData() {
-    return supabase.from("Genres").select(fields);
+  function getData(...tableRefs) {
+    return supabase.from("Genres").select(appendTableRefs(fields, tableRefs));
   }
 }
 

@@ -58,4 +58,20 @@ function enforceParamInteger(router, paramName) {
   });
 }
 
-export { enforceParamInteger, handleQueryResults };
+/*
+ * Purpose: To insert references to the provided tables into the given supabase
+ * select string.
+ *
+ * Returns: The modified string.
+ */
+function appendTableRefs(origSelect, tableRefs) {
+  let selectStr = origSelect;
+
+  tableRefs.forEach((ref) => {
+    selectStr += `, ${ref}!inner()`;
+  });
+
+  return selectStr;
+}
+
+export { appendTableRefs, enforceParamInteger, handleQueryResults };
