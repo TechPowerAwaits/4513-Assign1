@@ -119,6 +119,7 @@ Sorted by `title`.
 
 | /api/paintings/artists/country/_substring_
 | Returns the records from `Paintings` whose artist has a `nationality` starting with the given _substring_.
+Sorted by `title`.
 
 | /api/genres
 | Returns all data from `Genres`.
