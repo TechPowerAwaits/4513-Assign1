@@ -97,30 +97,6 @@ async function setRoutes(supabase, router) {
     }
   });
 
-  router.get("/galleries/:ref", async (req, resp) => {
-    const { data, error } = await getData()
-      .eq("galleryId", req.intParams.ref)
-      .order("title");
-
-    handleQueryResults(resp, data, error);
-  });
-
-  router.get("/artist/:ref", async (req, resp) => {
-    const { data, error } = await getData()
-      .eq("artistId", req.intParams.ref)
-      .order("title");
-
-    handleQueryResults(resp, data, error);
-  });
-
-  router.get("/artists/country/:substring", async (req, resp) => {
-    const { data, error } = await getData()
-      .ilike("Artists.nationality", `${req.params.substring}%`)
-      .order("title");
-
-    handleQueryResults(resp, data, error);
-  });
-
   /*
    * Purpose: Retrieves a promise for Paintings data.
    */
