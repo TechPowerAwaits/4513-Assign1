@@ -122,6 +122,9 @@ Sorted by `title`.
 
 | /api/genres
 | Returns all data from `Genres`.
+
+| /api/genres/_ref_
+| Returns the record from `Genres` corresponding to the `genreId` provided in _ref_.
 |===
 
 == Test Links
@@ -266,4 +269,14 @@ Sorted by `title`.
 2+^| */api/genres*
 | {base-url}/api/genres
 | Returns all genres.
+
+2+^| */api/genres/_ref_*
+| {base-url}/api/genres/76
+| Returns the genre with `genreId` of 76.
+| {base-url}/api/genres/0
+| Returns an error since no genre has a `genreId` of 0.
+| {base-url}/api/genres/76.5
+| Returns an error since 76.5 is not a valid integer.
+| {base-url}/api/genres/a
+| Returns an error since 'a' is not a valid integer.
 |===

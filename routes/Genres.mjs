@@ -2,7 +2,7 @@
  * Purpose: To form routes for Genres data.
  */
 
-import { handleQueryResults } from "./RouteCommon.mjs";
+import { enforceParamInteger, handleQueryResults } from "./RouteCommon.mjs";
 import { fields as erasFields } from "./Eras.mjs";
 
 /*
@@ -25,8 +25,16 @@ const fields = `
  * Genres table.
  */
 async function setRoutes(supabase, router) {
+  enforceParamInteger(router, "ref");
+
   router.get("/", async (req, resp) => {
     const { data, error } = await getData();
+
+    handleQueryResults(resp, data, error);
+  });
+
+  router.get("/:ref", async (req, resp) => {
+    const { data, error } = await getData().eq("genreId", req.intParams.ref);
 
     handleQueryResults(resp, data, error);
   });
