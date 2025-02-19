@@ -94,6 +94,9 @@ All errors are of the form:
 
 | /api/paintings
 | Returns all data from `Paintings`.
+
+| /api/paintings/sort/_title\|year_
+| Returns all data from `Paintings` sorted either by `title` or `yearOfWork`.
 |===
 
 == Test Links
@@ -150,4 +153,10 @@ All errors are of the form:
 2+^| */api/paintings*
 | {base-url}/api/paintings
 | Returns all paintings.
+
+2+^| */api/paintings/sort/_title\|year_*
+| {base-url}/api/paintings/sort/year
+| Returns all paintings sorted by `yearOfWork`.
+| {base-url}/api/paintings/sort/title
+| Returns all paintings sorted by `title`.
 |===

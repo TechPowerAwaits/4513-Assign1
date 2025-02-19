@@ -49,6 +49,18 @@ async function setRoutes(supabase, router) {
     handleQueryResults(resp, data, error);
   });
 
+  router.get("/sort/title", async (req, resp) => {
+    const { data, error } = await getData().order("title");
+
+    handleQueryResults(resp, data, error);
+  });
+
+  router.get("/sort/year", async (req, resp) => {
+    const { data, error } = await getData().order("yearOfWork");
+
+    handleQueryResults(resp, data, error);
+  });
+
   /*
    * Purpose: Retrieves a promise for Paintings data.
    */
