@@ -16,7 +16,7 @@ async function setRoutes(supabase, router) {
 
   router.get("/genres", async (req, resp) => {
     const { data, error } = await supabase
-      .rpc("get_genres")
+      .rpc("get_genre_painting_count")
       .order("count", { ascending: true });
 
     handleQueryResults(resp, data, error);
@@ -40,7 +40,7 @@ async function setRoutes(supabase, router) {
 
   router.get("/topgenres/:ref", async (req, resp) => {
     const { data, error } = await supabase
-      .rpc("get_genres_above", { pcount: req.intParams.ref })
+      .rpc("get_genre_painting_count_above", { pcount: req.intParams.ref })
       .order("count", { ascending: false });
 
     handleQueryResults(resp, data, error);
