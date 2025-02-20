@@ -71,6 +71,9 @@ All errors are of the form:
 | /api/eras
 | Returns all data from `Eras`.
 
+| /api/eras/_ref_
+| Returns the record from `Eras` corresponding to the `eraId` provided in _ref_.
+
 | /api/galleries
 | Returns all data from `Galleries`.
 
@@ -162,6 +165,17 @@ Sorted by the count in descending order.
 2+^| */api/eras*
 | {base-url}/api/eras
 | Returns all the eras for paintings.
+
+2+^| */api/eras/_ref_*
+| {base-url}/api/eras/2
+| Returns the era with `eraId` of 2.
+| {base-url}/api/eras/0
+| Returns an error since there is no era with `eraId` of 0.
+| {base-url}/api/eras/2.5
+| Returns an error since 2.5 is not a valid integer.
+| {base-url}/api/eras/a
+| Returns an error since 'a' is not a valid integer.
+
 
 2+^| */api/galleries*
 | {base-url}/api/galleries
