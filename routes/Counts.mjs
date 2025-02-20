@@ -23,6 +23,22 @@ async function setRoutes(supabase, router) {
 
     handleQueryResults(resp, data, error);
   });
+
+  router.get("/artists", async (req, resp) => {
+    // Makes use of a computed field:
+    // https://postgrest.org/en/stable/references/api/computed_fields.html
+    // The example in the document was only modified slightly
+    // (if not broke, why fix it?).
+    const { data, error } = await supabase
+      .from("Paintings")
+      .select(
+        `...Artists(artistName),
+		paintingId.count()`
+      )
+      .order("count", { ascending: false });
+
+    handleQueryResults(resp, data, error);
+  });
 }
 
 export { setRoutes };

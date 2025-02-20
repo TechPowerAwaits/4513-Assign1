@@ -144,6 +144,10 @@ Sorted by `yearOfWork`.
 | /api/counts/genres
 | Returns `genreName` and the number of paintings that exist for that genre.
 Sorted by the count in ascending order.
+
+| /api/counts/artists
+| Returns the name of all the artists and how many times they created a painting.
+Sorted by the count in descending order.
 |===
 
 == Test Links
@@ -334,4 +338,8 @@ Sorted by the count in ascending order.
 2+^| */api/counts/genres*
 | {base-url}/api/counts/genres
 | Returns a count of all paintings associated with all genres.
+
+2+^| */api/counts/artists*
+| {base-url}/api/counts/artists
+| Returns a count of all paintings associated with all artists.
 |===
