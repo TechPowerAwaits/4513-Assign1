@@ -41,9 +41,8 @@ function handleQueryResults(resp, data, error = null) {
  * Details: The parameter will be stored as an integer within resp.intParams.
  */
 function enforceParamInteger(router, paramName) {
-  const regex = /^-?\d+$/;
   router.param(paramName, (req, resp, next, value) => {
-    if (regex.test(value)) {
+    if (isInt(value)) {
       if (!req.intParams) {
         req.intParams = {};
       }
@@ -56,6 +55,16 @@ function enforceParamInteger(router, paramName) {
         .send(new ErrorMsg(`Parameter '${paramName}' is not an integer.`));
     }
   });
+
+  /*
+   * Purpose: Determines whether the given string only contains an integer or
+   * not.
+   *
+   * Returns: Whether the string value is integral.
+   */
+  function isInt(value) {
+    return /^-?\d+$/.test(value);
+  }
 }
 
 /*
