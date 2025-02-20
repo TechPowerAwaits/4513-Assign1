@@ -16,11 +16,7 @@ async function setRoutes(supabase, router) {
 
   router.get("/genres", async (req, resp) => {
     const { data, error } = await supabase
-      .from("PaintingGenres")
-      .select(
-        `...Genres(genreName),
-		paintingId.count()`
-      )
+      .rpc("get_genres")
       .order("count", { ascending: true });
 
     handleQueryResults(resp, data, error);
