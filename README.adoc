@@ -140,6 +140,10 @@ Sorted by `yearOfWork`.
 | Returns the records from `Paintings` which are associated with the given `eraId`.
 Only `paintingId`, `title`, and `yearOfWork` are provided.
 Sorted by `yearOfWork`.
+
+| /api/counts/genres
+| Returns `genreName` and the number of paintings that exist for that genre.
+Sorted by the count in ascending order.
 |===
 
 == Test Links
@@ -326,4 +330,8 @@ Sorted by `yearOfWork`.
 | Returns an error since 2.5 is not a valid integer.
 | {base-url}/api/paintings/era/a
 | Returns an error since 'a' is not a valid integer.
+
+2+^| */api/counts/genres*
+| {base-url}/api/counts/genres
+| Returns a count of all paintings associated with all genres.
 |===

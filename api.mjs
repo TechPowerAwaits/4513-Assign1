@@ -35,6 +35,7 @@ class APIRouteSetter {
 
 const routes = [
   new APIRouteSetter("Artists", "/artists"),
+  new APIRouteSetter("Counts", "/counts"),
   new APIRouteSetter("Eras", "/eras"),
   new APIRouteSetter("Galleries", "/galleries"),
   new APIRouteSetter("Genres", "/genres"),
