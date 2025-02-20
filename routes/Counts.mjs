@@ -2,7 +2,7 @@
  * Purpose: To form routes for counting data.
  */
 
-import { handleQueryResults } from "./RouteCommon.mjs";
+import { enforceParamInteger, handleQueryResults } from "./RouteCommon.mjs";
 
 /*
  * Purpose: Sets up all the Counting-related routes.
@@ -12,11 +12,13 @@ import { handleQueryResults } from "./RouteCommon.mjs";
  * The router provided must point to a path unique for data retrieved for counting.
  */
 async function setRoutes(supabase, router) {
+  enforceParamInteger(router, "ref");
+
   router.get("/genres", async (req, resp) => {
     const { data, error } = await supabase
       .from("PaintingGenres")
       .select(
-        `...Genres!inner(genreName),
+        `...Genres(genreName),
 		paintingId.count()`
       )
       .order("count", { ascending: true });
@@ -35,6 +37,14 @@ async function setRoutes(supabase, router) {
         `...Artists(artistName),
 		paintingId.count()`
       )
+      .order("count", { ascending: false });
+
+    handleQueryResults(resp, data, error);
+  });
+
+  router.get("/topgenres/:ref", async (req, resp) => {
+    const { data, error } = await supabase
+      .rpc("get_genres_above", { pcount: req.intParams.ref })
       .order("count", { ascending: false });
 
     handleQueryResults(resp, data, error);

@@ -148,6 +148,10 @@ Sorted by the count in ascending order.
 | /api/counts/artists
 | Returns the name of all the artists and how many times they created a painting.
 Sorted by the count in descending order.
+
+| /api/counts/topgenres/_ref_
+| Returns `genreName` and the number of paintings that exist for that genre as long as that count is greater than the given _ref_ value.
+Sorted by the count in descending order.
 |===
 
 == Test Links
@@ -342,4 +346,20 @@ Sorted by the count in descending order.
 2+^| */api/counts/artists*
 | {base-url}/api/counts/artists
 | Returns a count of all paintings associated with all artists.
+
+2+^| */api/counts/topgenres/_ref_*
+| {base-url}/api/counts/topgenres/20
+| Returns all genres with their associated painting count when they have more than 20 paintings associated with them.
+| {base-url}/api/counts/topgenres/2034958
+| Returns an error since there is no genre with more than 2034958 paintings associated with it.
+| {base-url}/api/counts/topgenres/200
+| Returns an error since there is no genre with more than 200 paintings associated with it.
+| {base-url}/api/counts/topgenres/0
+| Returns all genres with their associated painting count as long as the painting count is greater than 0.
+| {base-url}/api/counts/topgenres/-1
+| Returns all genres with their associated painting count.
+| {base-url}/api/counts/topgenres/20.5
+| Returns an error since 20.5 is not a valid integer.
+| {base-url}/api/counts/topgenres/a
+| Returns an error since 'a' is not a valid integer.
 |===
