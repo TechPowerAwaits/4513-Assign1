@@ -66,6 +66,16 @@ async function setRoutes(supabase, router) {
     handleQueryResults(resp, data, error);
   });
 
+  router.get("/era/:ref", async (req, resp) => {
+    const { data, error } = await supabase
+      .from("Paintings")
+      .select(`${majorFields}, PaintingGenres!inner(Genres!inner())`)
+      .eq("PaintingGenres.Genres.eraId", req.intParams.ref)
+      .order("yearOfWork");
+
+    handleQueryResults(resp, data, error);
+  });
+
   /*
    * Purpose: Retrieves a promise for Paintings data.
    */
