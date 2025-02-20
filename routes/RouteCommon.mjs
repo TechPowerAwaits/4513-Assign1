@@ -68,7 +68,7 @@ function appendTableRefs(origSelect, tableRefs) {
   let selectStr = origSelect;
 
   tableRefs.forEach((ref) => {
-    selectStr += `, ${ref}!inner()`;
+    selectStr += `, ${ref.getSupabaseRep()}`;
   });
 
   return selectStr;

@@ -12,6 +12,7 @@ import {
 } from "./RouteCommon.mjs";
 
 import { fields } from "./Paintings.mjs";
+import { TableRef } from "./TableRef.mjs";
 
 /*
  * Purpose: Provides the names of the most important user-facing fields for
@@ -67,9 +68,10 @@ async function setRoutes(supabase, router) {
   });
 
   router.get("/era/:ref", async (req, resp) => {
-    const { data, error } = await supabase
-      .from("Paintings")
-      .select(`${majorFields}, PaintingGenres!inner(Genres!inner())`)
+    const { data, error } = await getData(
+      majorFields,
+      new TableRef("PaintingGenres").addInnerRef("Genres")
+    )
       .eq("PaintingGenres.Genres.eraId", req.intParams.ref)
       .order("yearOfWork");
 

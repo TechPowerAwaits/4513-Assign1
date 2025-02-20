@@ -8,6 +8,7 @@ import {
   handleQueryResults,
 } from "./RouteCommon.mjs";
 import { fields as erasFields } from "./Eras.mjs";
+import { TableRef } from "./TableRef.mjs";
 
 /*
  * Purpose: Provides the names of all the fields in the Genres table.
@@ -44,7 +45,7 @@ async function setRoutes(supabase, router) {
   });
 
   router.get("/painting/:ref", async (req, resp) => {
-    const { data, error } = await getData("PaintingGenres")
+    const { data, error } = await getData(new TableRef("PaintingGenres"))
       .eq("PaintingGenres.paintingId", req.intParams.ref)
       .order("genreName", { ascending: true });
 
