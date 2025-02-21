@@ -2,7 +2,7 @@
  * Purpose: To form routes for Artists data.
  */
 
-import { handleQueryResults } from "./RouteCommon.mjs";
+import { generateDefaultRoute, handleQueryResults } from "./dataHandling.mjs";
 import { DataGetter } from "./dataRetrieval.mjs";
 import { setParamInt } from "./routeParse.mjs";
 
@@ -37,12 +37,7 @@ const tableName = "Artists";
 async function setRoutes(supabase, router) {
   const dataGetter = new DataGetter(supabase, tableName, fields);
   setParamInt(router, "ref");
-
-  router.get("/", async (req, resp) => {
-    const { data, error } = await dataGetter.get();
-
-    handleQueryResults(resp, data, error);
-  });
+  generateDefaultRoute(router, dataGetter);
 
   router.get("/:ref", async (req, resp) => {
     const { data, error } = await dataGetter

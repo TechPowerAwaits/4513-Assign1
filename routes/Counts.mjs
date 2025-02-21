@@ -2,7 +2,7 @@
  * Purpose: To form routes for counting data.
  */
 
-import { handleQueryResults } from "./RouteCommon.mjs";
+import { handleQueryResults } from "./dataHandling.mjs";
 import { setParamInt } from "./routeParse.mjs";
 
 /*

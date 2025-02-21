@@ -2,7 +2,7 @@
  * Purpose: To form routes for Paintings data.
  */
 
-import { handleQueryResults } from "./RouteCommon.mjs";
+import { generateDefaultRoute, handleQueryResults } from "./dataHandling.mjs";
 import { DataGetter } from "./dataRetrieval.mjs";
 import { checkRange, setParamInt } from "./routeParse.mjs";
 import { fields as artistFields } from "./Artists.mjs";
@@ -53,12 +53,7 @@ async function setRoutes(supabase, router) {
   const dataGetter = new DataGetter(supabase, tableName, fields);
   setParamInt(router, "ref");
   checkRange(router, "start", "end");
-
-  router.get("/", async (req, resp) => {
-    const { data, error } = await dataGetter.get();
-
-    handleQueryResults(resp, data, error);
-  });
+  generateDefaultRoute(router, dataGetter);
 
   router.get("/sort/title", async (req, resp) => {
     const { data, error } = await dataGetter.get().order("title");

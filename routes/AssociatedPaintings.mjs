@@ -5,7 +5,7 @@
  * would be done in this module.
  */
 
-import { handleQueryResults } from "./RouteCommon.mjs";
+import { handleQueryResults } from "./dataHandling.mjs";
 import { DataGetter } from "./dataRetrieval.mjs";
 import { setParamInt } from "./routeParse.mjs";
 import { fields, tableName } from "./Paintings.mjs";

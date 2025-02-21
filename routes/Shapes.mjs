@@ -2,7 +2,7 @@
  * Purpose: To form routes for Shapes data.
  */
 
-import { handleQueryResults } from "./RouteCommon.mjs";
+import { handleQueryResults } from "./dataHandling.mjs";
 import { DataGetter } from "./dataRetrieval.mjs";
 
 /*

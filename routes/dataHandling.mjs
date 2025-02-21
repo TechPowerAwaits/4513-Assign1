@@ -6,6 +6,18 @@
 import { errorMessages } from "../errorMsg.mjs";
 
 /*
+ * Purpose: To create a route to the root of the router's path that returns all
+ * data in JSON format.
+ */
+function generateDefaultRoute(router, dataGetter) {
+  router.get("/", async (req, resp) => {
+    const { data, error } = await dataGetter.get();
+
+    handleQueryResults(resp, data, error);
+  });
+}
+
+/*
  * Purpose: Handles the results of querying for data.
  *
  * Details: If an error occurs, the appropriate response will be sent out.
@@ -21,4 +33,4 @@ function handleQueryResults(resp, data, error = null) {
   }
 }
 
-export { handleQueryResults };
+export { generateDefaultRoute, handleQueryResults };
