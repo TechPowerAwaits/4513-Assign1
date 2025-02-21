@@ -3,6 +3,7 @@
  */
 
 import { appendTableRefs, handleQueryResults } from "./RouteCommon.mjs";
+import { setParamInt } from "./routeParse.mjs";
 import { fields as erasFields } from "./Eras.mjs";
 import { TableRef } from "./TableRef.mjs";
 
@@ -26,6 +27,8 @@ const fields = `
  * Genres table.
  */
 async function setRoutes(supabase, router) {
+  setParamInt(router, "ref");
+
   router.get("/", async (req, resp) => {
     const { data, error } = await getData();
 

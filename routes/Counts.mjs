@@ -3,6 +3,7 @@
  */
 
 import { handleQueryResults } from "./RouteCommon.mjs";
+import { setParamInt } from "./routeParse.mjs";
 
 /*
  * Purpose: Sets up all the Counting-related routes.
@@ -12,6 +13,8 @@ import { handleQueryResults } from "./RouteCommon.mjs";
  * The router provided must point to a path unique for data retrieved for counting.
  */
 async function setRoutes(supabase, router) {
+  setParamInt(router, "ref");
+
   router.get("/genres", async (req, resp) => {
     const { data, error } = await supabase
       .rpc("get_genre_painting_count")

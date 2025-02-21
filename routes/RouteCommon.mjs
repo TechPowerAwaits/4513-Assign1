@@ -36,39 +36,6 @@ function handleQueryResults(resp, data, error = null) {
 }
 
 /*
- * Purpose: Parses and stores a route's parameter as an integer within resp.intParams.
- *
- * Details: If the parameter cannot be converted to an integer, the route will
- * not be processed and a JSON error will be sent.
- */
-function setParamInt(router, paramName) {
-  router.param(paramName, (req, resp, next, value) => {
-    if (isInt(value)) {
-      if (!req.intParams) {
-        req.intParams = {};
-      }
-
-      req.intParams[paramName] = Number.parseInt(value);
-      next();
-    } else {
-      resp
-        .status(400)
-        .send(new ErrorMsg(`Parameter '${paramName}' is not an integer.`));
-    }
-  });
-
-  /*
-   * Purpose: Determines whether the given string only contains an integer or
-   * not.
-   *
-   * Returns: Whether the string value is integral.
-   */
-  function isInt(value) {
-    return /^-?\d+$/.test(value);
-  }
-}
-
-/*
  * Purpose: To insert references to the provided tables into the given supabase
  * select string.
  *
@@ -84,4 +51,4 @@ function appendTableRefs(origSelect, tableRefs) {
   return selectStr;
 }
 
-export { appendTableRefs, handleQueryResults, setParamInt };
+export { appendTableRefs, handleQueryResults };

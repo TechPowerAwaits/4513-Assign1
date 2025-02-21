@@ -3,6 +3,7 @@
  */
 
 import { appendTableRefs, handleQueryResults } from "./RouteCommon.mjs";
+import { setParamInt } from "./routeParse.mjs";
 
 /*
  * Purpose: Provides the names of all the fields in the Galleries table.
@@ -31,6 +32,8 @@ const fields = `
  * Galleries table.
  */
 async function setRoutes(supabase, router) {
+  setParamInt(router, "ref");
+
   router.get("/", async (req, resp) => {
     const { data, error } = await getData();
 

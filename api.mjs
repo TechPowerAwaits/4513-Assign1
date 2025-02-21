@@ -4,7 +4,6 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { Router } from "express";
-import { setParamInt } from "./routes/RouteCommon.mjs";
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -49,15 +48,8 @@ const routes = [
  * Purpose: Sets up all the API routes.
  *
  * Details: If a route fails to set, an error will be printed to the console.
- *
- * All routes that utilize the parameter ref will have checking done to ensure
- * that the parameter is a valid integer. If not, an error will be sent to the
- * user. The ref parameter will be converted to an integer and stored within
- * every response object under intParams.
  */
 async function setRoutes(router) {
-  setParamInt(router, "ref");
-
   await Promise.all(
     routes.map(async (routeSetter) => {
       try {

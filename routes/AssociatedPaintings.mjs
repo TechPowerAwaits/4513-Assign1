@@ -6,7 +6,7 @@
  */
 
 import { appendTableRefs, handleQueryResults } from "./RouteCommon.mjs";
-
+import { setParamInt } from "./routeParse.mjs";
 import { fields } from "./Paintings.mjs";
 import { TableRef } from "./TableRef.mjs";
 
@@ -29,6 +29,8 @@ const majorFields = `
  * Paintings table.
  */
 async function setRoutes(supabase, router) {
+  setParamInt(router, "ref");
+
   router.get("/galleries/:ref", async (req, resp) => {
     const { data, error } = await getData()
       .eq("galleryId", req.intParams.ref)

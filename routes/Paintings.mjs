@@ -2,15 +2,11 @@
  * Purpose: To form routes for Paintings data.
  */
 
-import {
-  appendTableRefs,
-  handleQueryResults,
-  setParamInt,
-} from "./RouteCommon.mjs";
+import { appendTableRefs, handleQueryResults } from "./RouteCommon.mjs";
+import { checkRange, setParamInt } from "./routeParse.mjs";
 import { fields as artistFields } from "./Artists.mjs";
 import { fields as galleryFields } from "./Galleries.mjs";
 import { fields as shapeFields } from "./Shapes.mjs";
-import { ErrorMsg } from "../ErrorMsg.mjs";
 
 /*
  * Purpose: Provides the names of all the fields in the Paintings table.
@@ -48,8 +44,8 @@ const fields = `
  * Paintings table.
  */
 async function setRoutes(supabase, router) {
-  setParamInt(router, "start");
-  setParamInt(router, "end");
+  setParamInt(router, "ref");
+  checkRange(router, "start", "end");
 
   router.get("/", async (req, resp) => {
     const { data, error } = await getData();
@@ -84,16 +80,12 @@ async function setRoutes(supabase, router) {
   });
 
   router.get("/years/:start/:end", async (req, resp) => {
-    if (req.intParams.end >= req.intParams.start) {
-      const { data, error } = await getData()
-        .gte("yearOfWork", req.intParams.start)
-        .lte("yearOfWork", req.intParams.end)
-        .order("yearOfWork");
+    const { data, error } = await getData()
+      .gte("yearOfWork", req.intParams.start)
+      .lte("yearOfWork", req.intParams.end)
+      .order("yearOfWork");
 
-      handleQueryResults(resp, data, error);
-    } else {
-      resp.status(400).send(new ErrorMsg("Provided range is malformed."));
-    }
+    handleQueryResults(resp, data, error);
   });
 
   /*
