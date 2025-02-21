@@ -3,7 +3,7 @@
  * parameters.
  */
 
-import { ErrorMsg } from "../ErrorMsg.mjs";
+import { errorMessages } from "../errorMsg.mjs";
 
 /*
  * Purpose: Parses and stores a route's parameter as an integer within resp.intParams.
@@ -24,9 +24,7 @@ function setParamInt(router, paramName) {
       req.intParams[paramName] = Number.parseInt(value);
       next();
     } else {
-      resp
-        .status(400)
-        .send(new ErrorMsg(`Parameter '${paramName}' is not an integer.`));
+      errorMessages["intExpected"].sendJSON(resp);
     }
   });
 
@@ -63,7 +61,7 @@ function checkRange(router, paramStartName, paramEndName) {
     if (value >= req.intParams.start) {
       next();
     } else {
-      resp.status(400).send(new ErrorMsg("Provided range is malformed."));
+      errorMessages["invalidRange"].sendJSON(resp);
     }
 
     startRangeVal = null;

@@ -55,8 +55,9 @@ async function setRoutes(router) {
       try {
         await routeSetter.set();
         router.use(routeSetter.path, routeSetter.router);
-      } catch {
+      } catch (e) {
         console.error(`Failed to set API route '${routeSetter.path}'.`);
+        console.error(e);
       }
     })
   );

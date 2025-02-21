@@ -3,7 +3,7 @@
  * routes.
  */
 
-import { ErrorMsg, errorMessages } from "../ErrorMsg.mjs";
+import { errorMessages } from "../errorMsg.mjs";
 
 /*
  * Purpose: Handles the results of querying for data.
@@ -12,26 +12,12 @@ import { ErrorMsg, errorMessages } from "../ErrorMsg.mjs";
  */
 function handleQueryResults(resp, data, error = null) {
   if (error) {
-    handleInternalError(resp, error);
+    console.error(error);
+    errorMessages["internal"].sendJSON(resp);
   } else if (data.length == 0) {
-    handleNoDataError(resp);
+    errorMessages["noData"].sendJSON(resp);
   } else {
     resp.send(data);
-  }
-
-  /*
-   * Purpose: Handles an error retrieving data.
-   */
-  function handleInternalError(resp, error) {
-    console.error(error);
-    resp.status(500).send(new ErrorMsg(errorMessages["internal"]));
-  }
-
-  /*
-   * Purpose: Handles an error where no data is found.
-   */
-  function handleNoDataError(resp) {
-    resp.status(404).send(new ErrorMsg(errorMessages["noData"]));
   }
 }
 
