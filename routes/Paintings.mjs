@@ -2,7 +2,8 @@
  * Purpose: To form routes for Paintings data.
  */
 
-import { appendTableRefs, handleQueryResults } from "./RouteCommon.mjs";
+import { handleQueryResults } from "./RouteCommon.mjs";
+import { DataGetter } from "./dataRetrieval.mjs";
 import { checkRange, setParamInt } from "./routeParse.mjs";
 import { fields as artistFields } from "./Artists.mjs";
 import { fields as galleryFields } from "./Galleries.mjs";
@@ -36,6 +37,11 @@ const fields = `
 `;
 
 /*
+ * Purpose: Provides the name of the table being targeted.
+ */
+const tableName = "Paintings";
+
+/*
  * Purpose: Sets up all the Paintings-related routes.
  *
  * Details: The supabase object must be initialized with a valid database.
@@ -44,35 +50,39 @@ const fields = `
  * Paintings table.
  */
 async function setRoutes(supabase, router) {
+  const dataGetter = new DataGetter(supabase, tableName, fields);
   setParamInt(router, "ref");
   checkRange(router, "start", "end");
 
   router.get("/", async (req, resp) => {
-    const { data, error } = await getData();
+    const { data, error } = await dataGetter.get();
 
     handleQueryResults(resp, data, error);
   });
 
   router.get("/sort/title", async (req, resp) => {
-    const { data, error } = await getData().order("title");
+    const { data, error } = await dataGetter.get().order("title");
 
     handleQueryResults(resp, data, error);
   });
 
   router.get("/sort/year", async (req, resp) => {
-    const { data, error } = await getData().order("yearOfWork");
+    const { data, error } = await dataGetter.get().order("yearOfWork");
 
     handleQueryResults(resp, data, error);
   });
 
   router.get("/:ref", async (req, resp) => {
-    const { data, error } = await getData().eq("paintingId", req.intParams.ref);
+    const { data, error } = await dataGetter
+      .get()
+      .eq("paintingId", req.intParams.ref);
 
     handleQueryResults(resp, data, error);
   });
 
   router.get("/search/:substring", async (req, resp) => {
-    const { data, error } = await getData()
+    const { data, error } = await dataGetter
+      .get()
       .ilike("title", `%${req.params.substring}%`)
       .order("title");
 
@@ -80,22 +90,14 @@ async function setRoutes(supabase, router) {
   });
 
   router.get("/years/:start/:end", async (req, resp) => {
-    const { data, error } = await getData()
+    const { data, error } = await dataGetter
+      .get()
       .gte("yearOfWork", req.intParams.start)
       .lte("yearOfWork", req.intParams.end)
       .order("yearOfWork");
 
     handleQueryResults(resp, data, error);
   });
-
-  /*
-   * Purpose: Retrieves a promise for Paintings data.
-   */
-  function getData(...tableRefs) {
-    return supabase
-      .from("Paintings")
-      .select(appendTableRefs(fields, tableRefs));
-  }
 }
 
-export { fields, setRoutes };
+export { fields, setRoutes, tableName };

@@ -14,6 +14,22 @@ class TableRef {
   }
 
   /*
+   * Purpose: To insert references to the provided tables into the given supabase
+   * select string.
+   *
+   * Returns: The modified string.
+   */
+  static appendSupabaseSel(origSelect, ...tableRefs) {
+    let selectStr = origSelect;
+
+    tableRefs.forEach((ref) => {
+      selectStr += `, ${ref.getSupabaseRep()}`;
+    });
+
+    return selectStr;
+  }
+
+  /*
    * Purpose: Adds a nested TableRef.
    */
   addInnerRef(tableName) {

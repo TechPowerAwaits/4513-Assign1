@@ -2,7 +2,8 @@
  * Purpose: To form routes for Genres data.
  */
 
-import { appendTableRefs, handleQueryResults } from "./RouteCommon.mjs";
+import { handleQueryResults } from "./RouteCommon.mjs";
+import { DataGetter } from "./dataRetrieval.mjs";
 import { setParamInt } from "./routeParse.mjs";
 import { fields as erasFields } from "./Eras.mjs";
 import { TableRef } from "./TableRef.mjs";
@@ -19,6 +20,11 @@ const fields = `
 `;
 
 /*
+ * Purpose: Provides the name of the table being targeted.
+ */
+const tableName = "Genres";
+
+/*
  * Purpose: Sets up all the Genres-related routes.
  *
  * Details: The supabase object must be initialized with a valid database.
@@ -27,34 +33,31 @@ const fields = `
  * Genres table.
  */
 async function setRoutes(supabase, router) {
+  const dataGetter = new DataGetter(supabase, tableName, fields);
   setParamInt(router, "ref");
 
   router.get("/", async (req, resp) => {
-    const { data, error } = await getData();
+    const { data, error } = await dataGetter.get();
 
     handleQueryResults(resp, data, error);
   });
 
   router.get("/:ref", async (req, resp) => {
-    const { data, error } = await getData().eq("genreId", req.intParams.ref);
+    const { data, error } = await dataGetter
+      .get()
+      .eq("genreId", req.intParams.ref);
 
     handleQueryResults(resp, data, error);
   });
 
   router.get("/painting/:ref", async (req, resp) => {
-    const { data, error } = await getData(new TableRef("PaintingGenres"))
+    const { data, error } = await dataGetter
+      .get(fields, new TableRef("PaintingGenres"))
       .eq("PaintingGenres.paintingId", req.intParams.ref)
       .order("genreName", { ascending: true });
 
     handleQueryResults(resp, data, error);
   });
-
-  /*
-   * Purpose: Retrieves a promise for Genres data.
-   */
-  function getData(...tableRefs) {
-    return supabase.from("Genres").select(appendTableRefs(fields, tableRefs));
-  }
 }
 
-export { fields, setRoutes };
+export { fields, setRoutes, tableName };

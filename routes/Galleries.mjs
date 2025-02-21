@@ -2,7 +2,8 @@
  * Purpose: To form routes for Galleries data.
  */
 
-import { appendTableRefs, handleQueryResults } from "./RouteCommon.mjs";
+import { handleQueryResults } from "./RouteCommon.mjs";
+import { DataGetter } from "./dataRetrieval.mjs";
 import { setParamInt } from "./routeParse.mjs";
 
 /*
@@ -24,6 +25,11 @@ const fields = `
 `;
 
 /*
+ * Purpose: Provides the name of the table being targeted.
+ */
+const tableName = "Galleries";
+
+/*
  * Purpose: Sets up all the Galleries-related routes.
  *
  * Details: The supabase object must be initialized with a valid database.
@@ -32,37 +38,30 @@ const fields = `
  * Galleries table.
  */
 async function setRoutes(supabase, router) {
+  const dataGetter = new DataGetter(supabase, tableName, fields);
   setParamInt(router, "ref");
 
   router.get("/", async (req, resp) => {
-    const { data, error } = await getData();
+    const { data, error } = await dataGetter.get();
 
     handleQueryResults(resp, data, error);
   });
 
   router.get("/:ref", async (req, resp) => {
-    const { data, error } = await getData().eq("galleryId", req.intParams.ref);
+    const { data, error } = await dataGetter
+      .get()
+      .eq("galleryId", req.intParams.ref);
 
     handleQueryResults(resp, data, error);
   });
 
   router.get("/country/:substring", async (req, resp) => {
-    const { data, error } = await getData().ilike(
-      "galleryCountry",
-      `${req.params.substring}%`
-    );
+    const { data, error } = await dataGetter
+      .get()
+      .ilike("galleryCountry", `${req.params.substring}%`);
 
     handleQueryResults(resp, data, error);
   });
-
-  /*
-   * Purpose: Retrieves a promise for Galleries data.
-   */
-  function getData(...tableRefs) {
-    return supabase
-      .from("Galleries")
-      .select(appendTableRefs(fields, tableRefs));
-  }
 }
 
-export { fields, setRoutes };
+export { fields, setRoutes, tableName };

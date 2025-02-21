@@ -2,7 +2,8 @@
  * Purpose: To form routes for Artists data.
  */
 
-import { appendTableRefs, handleQueryResults } from "./RouteCommon.mjs";
+import { handleQueryResults } from "./RouteCommon.mjs";
+import { DataGetter } from "./dataRetrieval.mjs";
 import { setParamInt } from "./routeParse.mjs";
 
 /*
@@ -21,6 +22,11 @@ const fields = `
 `;
 
 /*
+ * Purpose: Provides the name of the table being targeted.
+ */
+const tableName = "Artists";
+
+/*
  * Purpose: Sets up all the Artists-related routes.
  *
  * Details: The supabase object must be initialized with a valid database.
@@ -29,44 +35,38 @@ const fields = `
  * Artists table.
  */
 async function setRoutes(supabase, router) {
+  const dataGetter = new DataGetter(supabase, tableName, fields);
   setParamInt(router, "ref");
 
   router.get("/", async (req, resp) => {
-    const { data, error } = await getData();
+    const { data, error } = await dataGetter.get();
 
     handleQueryResults(resp, data, error);
   });
 
   router.get("/:ref", async (req, resp) => {
-    const { data, error } = await getData().eq("artistId", req.intParams.ref);
+    const { data, error } = await dataGetter
+      .get()
+      .eq("artistId", req.intParams.ref);
 
     handleQueryResults(resp, data, error);
   });
 
   router.get("/search/:substring", async (req, resp) => {
-    const { data, error } = await getData().ilike(
-      "lastName",
-      `${req.params.substring}%`
-    );
+    const { data, error } = await dataGetter
+      .get()
+      .ilike("lastName", `${req.params.substring}%`);
 
     handleQueryResults(resp, data, error);
   });
 
   router.get("/country/:substring", async (req, resp) => {
-    const { data, error } = await getData().ilike(
-      "nationality",
-      `${req.params.substring}%`
-    );
+    const { data, error } = await dataGetter
+      .get()
+      .ilike("nationality", `${req.params.substring}%`);
 
     handleQueryResults(resp, data, error);
   });
-
-  /*
-   * Purpose: Retrieves a promise for Artists data.
-   */
-  function getData(...tableRefs) {
-    return supabase.from("Artists").select(appendTableRefs(fields, tableRefs));
-  }
 }
 
-export { fields, setRoutes };
+export { fields, setRoutes, tableName };

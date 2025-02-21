@@ -21,20 +21,4 @@ function handleQueryResults(resp, data, error = null) {
   }
 }
 
-/*
- * Purpose: To insert references to the provided tables into the given supabase
- * select string.
- *
- * Returns: The modified string.
- */
-function appendTableRefs(origSelect, tableRefs) {
-  let selectStr = origSelect;
-
-  tableRefs.forEach((ref) => {
-    selectStr += `, ${ref.getSupabaseRep()}`;
-  });
-
-  return selectStr;
-}
-
-export { appendTableRefs, handleQueryResults };
+export { handleQueryResults };
