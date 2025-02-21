@@ -2,7 +2,7 @@
  * Purpose: To form routes for counting data.
  */
 
-import { enforceParamInteger, handleQueryResults } from "./RouteCommon.mjs";
+import { handleQueryResults } from "./RouteCommon.mjs";
 
 /*
  * Purpose: Sets up all the Counting-related routes.
@@ -12,8 +12,6 @@ import { enforceParamInteger, handleQueryResults } from "./RouteCommon.mjs";
  * The router provided must point to a path unique for data retrieved for counting.
  */
 async function setRoutes(supabase, router) {
-  enforceParamInteger(router, "ref");
-
   router.get("/genres", async (req, resp) => {
     const { data, error } = await supabase
       .rpc("get_genre_painting_count")

@@ -2,11 +2,7 @@
  * Purpose: To form routes for Eras data.
  */
 
-import {
-  appendTableRefs,
-  enforceParamInteger,
-  handleQueryResults,
-} from "./RouteCommon.mjs";
+import { appendTableRefs, handleQueryResults } from "./RouteCommon.mjs";
 
 /*
  * Purpose: Provides the names of all the fields in the Eras table.
@@ -26,8 +22,6 @@ const fields = `
  * Eras table.
  */
 async function setRoutes(supabase, router) {
-  enforceParamInteger(router, "ref");
-
   router.get("/", async (req, resp) => {
     const { data, error } = await getData();
 

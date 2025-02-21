@@ -4,8 +4,8 @@
 
 import {
   appendTableRefs,
-  enforceParamInteger,
   handleQueryResults,
+  setParamInt,
 } from "./RouteCommon.mjs";
 import { fields as artistFields } from "./Artists.mjs";
 import { fields as galleryFields } from "./Galleries.mjs";
@@ -48,9 +48,8 @@ const fields = `
  * Paintings table.
  */
 async function setRoutes(supabase, router) {
-  enforceParamInteger(router, "ref");
-  enforceParamInteger(router, "start");
-  enforceParamInteger(router, "end");
+  setParamInt(router, "start");
+  setParamInt(router, "end");
 
   router.get("/", async (req, resp) => {
     const { data, error } = await getData();

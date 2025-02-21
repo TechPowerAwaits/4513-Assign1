@@ -36,11 +36,12 @@ function handleQueryResults(resp, data, error = null) {
 }
 
 /*
- * Purpose: Produces an error if the named parameter is not integral.
+ * Purpose: Parses and stores a route's parameter as an integer within resp.intParams.
  *
- * Details: The parameter will be stored as an integer within resp.intParams.
+ * Details: If the parameter cannot be converted to an integer, the route will
+ * not be processed and a JSON error will be sent.
  */
-function enforceParamInteger(router, paramName) {
+function setParamInt(router, paramName) {
   router.param(paramName, (req, resp, next, value) => {
     if (isInt(value)) {
       if (!req.intParams) {
@@ -83,4 +84,4 @@ function appendTableRefs(origSelect, tableRefs) {
   return selectStr;
 }
 
-export { appendTableRefs, enforceParamInteger, handleQueryResults };
+export { appendTableRefs, handleQueryResults, setParamInt };

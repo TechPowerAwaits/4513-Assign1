@@ -5,11 +5,7 @@
  * would be done in this module.
  */
 
-import {
-  appendTableRefs,
-  enforceParamInteger,
-  handleQueryResults,
-} from "./RouteCommon.mjs";
+import { appendTableRefs, handleQueryResults } from "./RouteCommon.mjs";
 
 import { fields } from "./Paintings.mjs";
 import { TableRef } from "./TableRef.mjs";
@@ -33,8 +29,6 @@ const majorFields = `
  * Paintings table.
  */
 async function setRoutes(supabase, router) {
-  enforceParamInteger(router, "ref");
-
   router.get("/galleries/:ref", async (req, resp) => {
     const { data, error } = await getData()
       .eq("galleryId", req.intParams.ref)

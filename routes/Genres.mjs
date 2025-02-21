@@ -2,11 +2,7 @@
  * Purpose: To form routes for Genres data.
  */
 
-import {
-  appendTableRefs,
-  enforceParamInteger,
-  handleQueryResults,
-} from "./RouteCommon.mjs";
+import { appendTableRefs, handleQueryResults } from "./RouteCommon.mjs";
 import { fields as erasFields } from "./Eras.mjs";
 import { TableRef } from "./TableRef.mjs";
 
@@ -30,8 +26,6 @@ const fields = `
  * Genres table.
  */
 async function setRoutes(supabase, router) {
-  enforceParamInteger(router, "ref");
-
   router.get("/", async (req, resp) => {
     const { data, error } = await getData();
 
