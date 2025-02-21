@@ -2,8 +2,9 @@
  * Purpose: To form routes for Shapes data.
  */
 
-import { handleQueryResults } from "./dataHandling.mjs";
+import { generateDefaultRoute, handleQueryResults } from "./dataHandling.mjs";
 import { DataGetter } from "./dataRetrieval.mjs";
+import { setParamInt } from "./routeParse.mjs";
 
 /*
  * Purpose: Provides the names of all the fields in the Shapes table.
@@ -28,7 +29,16 @@ const tableName = "Shapes";
  */
 async function setRoutes(supabase, router) {
   const dataGetter = new DataGetter(supabase, tableName, fields);
-  // TODO
+  setParamInt(router, "ref");
+  generateDefaultRoute(router, dataGetter);
+
+  router.get("/:ref", async (req, resp) => {
+    const { data, error } = await dataGetter
+      .get()
+      .eq("shapeId", req.intParams.ref);
+
+    handleQueryResults(resp, data, error);
+  });
 }
 
 export { fields, setRoutes, tableName };

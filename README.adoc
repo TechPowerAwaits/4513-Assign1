@@ -144,6 +144,12 @@ Sorted by `yearOfWork`.
 Only `paintingId`, `title`, and `yearOfWork` are provided.
 Sorted by `yearOfWork`.
 
+| /api/shapes
+| Returns all data from `Shapes`.
+
+| /api/shapes/_ref_
+| Returns the record from `Shapes` corresponding to the `shapeId` provided in _ref_.
+
 | /api/counts/genres
 | Returns `genreName` and the number of paintings that exist for that genre.
 Sorted by the count in ascending order.
@@ -351,6 +357,20 @@ Sorted by the count in descending order.
 | {base-url}/api/paintings/era/2.5
 | Returns an error since 2.5 is not a valid integer.
 | {base-url}/api/paintings/era/a
+| Returns an error since 'a' is not a valid integer.
+
+2+^| */api/shapes*
+| {base-url}/api/shapes
+| Returns all the shapes.
+
+2+^| */api/shapes/_ref_*
+| {base-url}/api/shapes/3
+| Returns the shape with `shapeId` of 3.
+| {base-url}/api/shapes/0
+| Returns an error since there is no shape with `shapeId` of 0.
+| {base-url}/api/shapes/2.5
+| Returns an error since 2.5 is not a valid integer.
+| {base-url}/api/shapes/a
 | Returns an error since 'a' is not a valid integer.
 
 2+^| */api/counts/genres*
