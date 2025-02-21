@@ -58,7 +58,7 @@ The aim of the original project was learning how to use Supabase alongside NodeJ
 
 === Routes
 
-NOTE: All data provided is in JSON.
+NOTE: All data provided by the API routes are in JSON.
 
 IMPORTANT: If a parameter passed does not result in a record being found, an error will be returned.
 All errors are of the form:
@@ -162,6 +162,8 @@ Sorted by the count in descending order.
 | Returns `genreName` and the number of paintings that exist for that genre as long as that count is greater than the given _ref_ value.
 Sorted by the count in descending order.
 |===
+
+TIP: If an invalid route is entered, that is still considered an error condition and will be handled appropriately.
 
 == Test Links
 
@@ -396,4 +398,12 @@ Sorted by the count in descending order.
 | Returns an error since 20.5 is not a valid integer.
 | {base-url}/api/counts/topgenres/a
 | Returns an error since 'a' is not a valid integer.
+
+2+^| *Other*
+| {base-url}/api/counts
+| Returns an error since that is not a valid route.
+| {base-url}/api/paintings/sort/nope
+| Returns an error since that is not a valid route.
+| {base-url}/appi/galleries/30
+| Returns an error in HTML since that is not a valid API route.
 |===

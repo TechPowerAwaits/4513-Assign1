@@ -50,6 +50,18 @@ class ErrorMsg {
   sendJSON(resp) {
     resp.status(this.code).send(this.getSendable());
   }
+
+  /*
+   * Purpose: Sends the user-facing HTML representation of the error.
+   */
+  sendHTML(resp) {
+    let html = "";
+    html += "<html><body>";
+    html += `<h1>${this.code}</h1>`;
+    html += `<strong>${this.message}</strong>`;
+    html += "</body></html>";
+    resp.send(html);
+  }
 }
 
 /*
@@ -63,6 +75,10 @@ const errorMessages = {
     400
   ),
   noData: new ErrorMsg("No data found. Invalid parameter?", 404),
+  notFound: new ErrorMsg(
+    "Could not find what you were looking for. Please check your spelling.",
+    404
+  ),
 };
 
 export { ErrorMsg, errorMessages };

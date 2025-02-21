@@ -4,6 +4,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { Router } from "express";
+import { errorMessages } from "./errorMsg.mjs";
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -61,6 +62,12 @@ async function setRoutes(router) {
       }
     })
   );
+
+  // Thanks to Express's FAQ for mentioning how to handle 404 Errors.
+  // https://expressjs.com/en/starter/faq.html
+  router.use((req, resp, next) => {
+    errorMessages["notFound"].sendJSON(resp);
+  });
 }
 
 export { setRoutes };
