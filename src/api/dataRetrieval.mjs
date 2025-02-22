@@ -2,7 +2,7 @@
  * Purpose: Manages the retrieval of data from a database.
  */
 
-import { TableRef } from "./TableRef.mjs";
+import { TableRef } from "./tableRef.mjs";
 
 /*
  * Purpose: Provides the ability to get data from fields in a database.

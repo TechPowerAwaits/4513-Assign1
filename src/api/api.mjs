@@ -4,7 +4,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { Router } from "express";
-import { errorMessages } from "./errorMsg.mjs";
+import { errorMessages } from "../errorMsg.mjs";
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -35,14 +35,14 @@ class APIRouteSetter {
 }
 
 const routes = [
-  new APIRouteSetter("Artists", "/artists"),
-  new APIRouteSetter("Counts", "/counts"),
-  new APIRouteSetter("Eras", "/eras"),
-  new APIRouteSetter("Galleries", "/galleries"),
-  new APIRouteSetter("Genres", "/genres"),
-  new APIRouteSetter("Paintings", "/paintings"),
-  new APIRouteSetter("AssociatedPaintings", "/paintings"),
-  new APIRouteSetter("Shapes", "/shapes"),
+  new APIRouteSetter("artists", "/artists"),
+  new APIRouteSetter("counts", "/counts"),
+  new APIRouteSetter("eras", "/eras"),
+  new APIRouteSetter("galleries", "/galleries"),
+  new APIRouteSetter("genres", "/genres"),
+  new APIRouteSetter("paintings", "/paintings"),
+  new APIRouteSetter("associatedPaintings", "/paintings"),
+  new APIRouteSetter("shapes", "/shapes"),
 ];
 
 /*

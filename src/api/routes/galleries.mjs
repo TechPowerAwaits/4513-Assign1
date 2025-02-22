@@ -2,9 +2,9 @@
  * Purpose: To form routes for Galleries data.
  */
 
-import { generateDefaultRoute, handleQueryResults } from "./dataHandling.mjs";
-import { DataGetter } from "./dataRetrieval.mjs";
-import { setParamInt } from "./routeParse.mjs";
+import { generateDefaultRoute, handleQueryResults } from "../dataHandling.mjs";
+import { DataGetter } from "../dataRetrieval.mjs";
+import { setParamInt } from "../routeParse.mjs";
 
 /*
  * Purpose: Provides the names of all the fields in the Galleries table.

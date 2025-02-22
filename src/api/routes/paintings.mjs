@@ -2,12 +2,12 @@
  * Purpose: To form routes for Paintings data.
  */
 
-import { generateDefaultRoute, handleQueryResults } from "./dataHandling.mjs";
-import { DataGetter } from "./dataRetrieval.mjs";
-import { checkRange, setParamInt } from "./routeParse.mjs";
-import { fields as artistFields } from "./Artists.mjs";
-import { fields as galleryFields } from "./Galleries.mjs";
-import { fields as shapeFields } from "./Shapes.mjs";
+import { generateDefaultRoute, handleQueryResults } from "../dataHandling.mjs";
+import { DataGetter } from "../dataRetrieval.mjs";
+import { checkRange, setParamInt } from "../routeParse.mjs";
+import { fields as artistFields } from "./artists.mjs";
+import { fields as galleryFields } from "./galleries.mjs";
+import { fields as shapeFields } from "./shapes.mjs";
 
 /*
  * Purpose: Provides the names of all the fields in the Paintings table.

@@ -5,11 +5,11 @@
  * would be done in this module.
  */
 
-import { handleQueryResults } from "./dataHandling.mjs";
-import { DataGetter } from "./dataRetrieval.mjs";
-import { setParamInt } from "./routeParse.mjs";
-import { fields, tableName } from "./Paintings.mjs";
-import { TableRef } from "./TableRef.mjs";
+import { handleQueryResults } from "../dataHandling.mjs";
+import { DataGetter } from "../dataRetrieval.mjs";
+import { setParamInt } from "../routeParse.mjs";
+import { fields, tableName } from "./paintings.mjs";
+import { TableRef } from "../tableRef.mjs";
 
 /*
  * Purpose: Provides the names of the most important user-facing fields for

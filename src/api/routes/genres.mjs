@@ -2,11 +2,11 @@
  * Purpose: To form routes for Genres data.
  */
 
-import { generateDefaultRoute, handleQueryResults } from "./dataHandling.mjs";
-import { DataGetter } from "./dataRetrieval.mjs";
-import { setParamInt } from "./routeParse.mjs";
-import { fields as erasFields } from "./Eras.mjs";
-import { TableRef } from "./TableRef.mjs";
+import { generateDefaultRoute, handleQueryResults } from "../dataHandling.mjs";
+import { DataGetter } from "../dataRetrieval.mjs";
+import { setParamInt } from "../routeParse.mjs";
+import { fields as erasFields } from "./eras.mjs";
+import { TableRef } from "../tableRef.mjs";
 
 /*
  * Purpose: Provides the names of all the fields in the Genres table.

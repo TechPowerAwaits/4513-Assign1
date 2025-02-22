@@ -2,8 +2,8 @@
  * Purpose: To form routes for counting data.
  */
 
-import { handleQueryResults } from "./dataHandling.mjs";
-import { setParamInt } from "./routeParse.mjs";
+import { handleQueryResults } from "../dataHandling.mjs";
+import { setParamInt } from "../routeParse.mjs";
 
 /*
  * Purpose: Sets up all the Counting-related routes.
