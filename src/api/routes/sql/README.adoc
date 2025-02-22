@@ -1,0 +1,21 @@
+# Art API SQL
+Richard Johnston <techpowerawaits@outlook.com>
+
+This folder contains any SQL functions that are used within the supabase instance in order to allow reproducibility and verification.
+
+|===
+| SQL | Route(s) Used In | Code File | Info
+
+| link:ArtistName.sql[]
+| /api/counts/artists
+| link:../counts.mjs[counts.mjs]
+| Makes it easier to return a combined first-last name.
+
+| link:GenrePaintingCount.sql[]
+|
+/api/counts/genres/_ref_
+/api/counts/topgenres/_ref_
+| link:../counts.mjs[counts.mjs]
+| PostgREST--at the time this API was made--did not support the `having` SQL clause, which made it difficult to filter by painting count (and thus, handle the latter route).
+Since both routes return similar data, it was decided to use a similar SQL function for both of them.
+|===
