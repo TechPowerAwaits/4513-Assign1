@@ -1,3 +1,7 @@
+/*
+ * Purpose: To start up the server.
+ */
+
 import express from "express";
 import { setRoutes as setApiRoutes } from "./api/api.mjs";
 import { errorMessages } from "./errorMsg.mjs";
