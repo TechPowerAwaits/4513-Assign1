@@ -170,11 +170,11 @@ TIP: If an invalid route is entered, that is still considered an error condition
 |===
 | Link | Description
 
-2+^| */api/eras*
+2+^s| /api/eras
 | {base-url}/api/eras
 | Returns all the eras for paintings.
 
-2+^| */api/eras/_ref_*
+2+^s| /api/eras/_ref_
 | {base-url}/api/eras/2
 | Returns the era with `eraId` of 2.
 | {base-url}/api/eras/0
@@ -185,11 +185,11 @@ TIP: If an invalid route is entered, that is still considered an error condition
 | Returns an error since 'a' is not a valid integer.
 
 
-2+^| */api/galleries*
+2+^s| /api/galleries
 | {base-url}/api/galleries
 | Returns all the galleries containing paintings.
 
-2+^| */api/galleries/_ref_*
+2+^s| /api/galleries/_ref_
 | {base-url}/api/galleries/30
 | Returns the gallery with `galleryId` of 30.
 | {base-url}/api/galleries/1
@@ -199,17 +199,17 @@ TIP: If an invalid route is entered, that is still considered an error condition
 | {base-url}/api/galleries/a
 | Returns an error since 'a' is not a valid integer.
 
-2+^| */api/galleries/country/_substring_*
+2+^s| /api/galleries/country/_substring_
 | {base-url}/api/galleries/country/fra
 | Returns all the galleries based in a country starting with "fra".
 | {base-url}/api/galleries/country/not
 | Returns an error since there are no galleries based in a country starting with "not".
 
-2+^| */api/artists*
+2+^s| /api/artists
 | {base-url}/api/artists
 | Returns all the artists.
 
-2+^| */api/artists/_ref_*
+2+^s| /api/artists/_ref_
 | {base-url}/api/artists/12
 | Returns the artist with `artistId` of 12.
 | {base-url}/api/artists/1223423
@@ -221,7 +221,7 @@ TIP: If an invalid route is entered, that is still considered an error condition
 | {base-url}/api/artists/a
 | Returns an error since 'a' is not a valid integer.
 
-2+^| */api/artists/search/_substring_*
+2+^s| /api/artists/search/_substring_
 | {base-url}/api/artists/search/ma
 | Returns all artists whose last names begin with ma.
 | {base-url}/api/artists/search/mA
@@ -229,23 +229,23 @@ TIP: If an invalid route is entered, that is still considered an error condition
 | {base-url}/api/artists/search/na
 | Returns an error since there are no artists whose last names begin with na.
 
-2+^| */api/artists/country/_substring_*
+2+^s| /api/artists/country/_substring_
 | {base-url}/api/artists/country/fra
 | Returns all artists whose nationality begins with fra.
 | {base-url}/api/artists/country/not
 | Returns an error since there are no artists whose nationality begin with not.
 
-2+^| */api/paintings*
+2+^s| /api/paintings
 | {base-url}/api/paintings
 | Returns all paintings.
 
-2+^| */api/paintings/sort/_title\|year_*
+2+^s| /api/paintings/sort/_title\|year_
 | {base-url}/api/paintings/sort/year
 | Returns all paintings sorted by `yearOfWork`.
 | {base-url}/api/paintings/sort/title
 | Returns all paintings sorted by `title`.
 
-2+^| */api/paintings/_ref_*
+2+^s| /api/paintings/_ref_
 | {base-url}/api/paintings/63
 | Returns the painting with `paintingId` of 63.
 | {base-url}/api/paintings/3
@@ -255,7 +255,7 @@ TIP: If an invalid route is entered, that is still considered an error condition
 | {base-url}/api/paintings/a
 | Returns an error since 'a' is not a valid integer.
 
-2+^| */api/paintings/search/_substring_*
+2+^s| /api/paintings/search/_substring_
 | {base-url}/api/paintings/search/port
 | Returns all paintings whose title has the substring "port" in it.
 | {base-url}/api/paintings/search/pORt
@@ -265,7 +265,7 @@ TIP: If an invalid route is entered, that is still considered an error condition
 | {base-url}/api/paintings/search/not
 | Returns an error since there are no paintings whose title has the substring "not" in it.
 
-2+^| */api/paintings/years/_start_/_end_*
+2+^s| /api/paintings/years/_start_/_end_
 | {base-url}/api/paintings/years/1800/1850
 | Returns all paintings whose `yearOfWork` is between 1800 and 1850 (inclusive).
 | {base-url}/api/paintings/years/1800/1800
@@ -287,7 +287,7 @@ TIP: If an invalid route is entered, that is still considered an error condition
 | {base-url}/api/paintings/years/1800.5/1850.5
 | Returns an error since neither 1800.5 nor 1850.5 are valid integers.
 
-2+^| */api/paintings/galleries/_ref_*
+2+^s| /api/paintings/galleries/_ref_
 | {base-url}/api/paintings/galleries/5
 | Returns all paintings whose `galleryId` is 5.
 | {base-url}/api/paintings/galleries/1
@@ -297,7 +297,7 @@ TIP: If an invalid route is entered, that is still considered an error condition
 | {base-url}/api/paintings/galleries/a
 | Returns an error since 'a' is not a valid integer.
 
-2+^| */api/paintings/artist/_ref_*
+2+^s| /api/paintings/artist/_ref_
 | {base-url}/api/paintings/artist/16
 | Returns all paintings whose `artistId` is 16.
 | {base-url}/api/paintings/artist/666
@@ -309,17 +309,17 @@ TIP: If an invalid route is entered, that is still considered an error condition
 | {base-url}/api/paintings/artist/a
 | Returns an error since 'a' is not a valid integer.
 
-2+^| */api/paintings/artists/country/_substring_*
+2+^s| /api/paintings/artists/country/_substring_
 | {base-url}/api/paintings/artists/country/ital
 | Returns all paintings whose artist has a nationality starting with "ital".
 | {base-url}/api/paintings/artists/country/not
 | Returns an error since no artists have a nationality starting with "not".
 
-2+^| */api/genres*
+2+^s| /api/genres
 | {base-url}/api/genres
 | Returns all genres.
 
-2+^| */api/genres/_ref_*
+2+^s| /api/genres/_ref_
 | {base-url}/api/genres/76
 | Returns the genre with `genreId` of 76.
 | {base-url}/api/genres/0
@@ -329,7 +329,7 @@ TIP: If an invalid route is entered, that is still considered an error condition
 | {base-url}/api/genres/a
 | Returns an error since 'a' is not a valid integer.
 
-2+^| */api/genres/painting/_ref_*
+2+^s| /api/genres/painting/_ref_
 | {base-url}/api/genres/painting/408
 | Returns the genres associated with a `paintingId` of 408.
 | {base-url}/api/genres/painting/jsdfhg
@@ -341,7 +341,7 @@ TIP: If an invalid route is entered, that is still considered an error condition
 | {base-url}/api/genres/painting/a
 | Returns an error since 'a' is not a valid integer.
 
-2+^|*/api/paintings/genre/_ref_*
+2+^s|/api/paintings/genre/_ref_
 | {base-url}/api/paintings/genre/78
 | Returns the paintings associated with a `genreId` of 78.
 | {base-url}/api/paintings/genre/0
@@ -351,7 +351,7 @@ TIP: If an invalid route is entered, that is still considered an error condition
 | {base-url}/api/paintings/genre/a
 | Returns an error since 'a' is not a valid integer.
 
-2+^| */api/paintings/era/_ref_*
+2+^s| /api/paintings/era/_ref_
 | {base-url}/api/paintings/era/2
 | Returns the paintings associated with a `eraId` of 2.
 | {base-url}/api/paintings/era/0
@@ -361,11 +361,11 @@ TIP: If an invalid route is entered, that is still considered an error condition
 | {base-url}/api/paintings/era/a
 | Returns an error since 'a' is not a valid integer.
 
-2+^| */api/shapes*
+2+^s| /api/shapes
 | {base-url}/api/shapes
 | Returns all the shapes.
 
-2+^| */api/shapes/_ref_*
+2+^s| /api/shapes/_ref_
 | {base-url}/api/shapes/3
 | Returns the shape with `shapeId` of 3.
 | {base-url}/api/shapes/0
@@ -375,15 +375,15 @@ TIP: If an invalid route is entered, that is still considered an error condition
 | {base-url}/api/shapes/a
 | Returns an error since 'a' is not a valid integer.
 
-2+^| */api/counts/genres*
+2+^s| /api/counts/genres
 | {base-url}/api/counts/genres
 | Returns a count of all paintings associated with all genres.
 
-2+^| */api/counts/artists*
+2+^s| /api/counts/artists
 | {base-url}/api/counts/artists
 | Returns a count of all paintings associated with all artists.
 
-2+^| */api/counts/topgenres/_ref_*
+2+^s| /api/counts/topgenres/_ref_
 | {base-url}/api/counts/topgenres/20
 | Returns all genres with their associated painting count when they have more than 20 paintings associated with them.
 | {base-url}/api/counts/topgenres/2034958
@@ -399,7 +399,7 @@ TIP: If an invalid route is entered, that is still considered an error condition
 | {base-url}/api/counts/topgenres/a
 | Returns an error since 'a' is not a valid integer.
 
-2+^| *Other*
+2+^s| Other
 | {base-url}/api/counts
 | Returns an error since that is not a valid route.
 | {base-url}/api/paintings/sort/nope
