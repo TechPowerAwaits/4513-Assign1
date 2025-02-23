@@ -406,6 +406,9 @@ TIP: If an invalid route is entered, that is still considered an error condition
 | Returns an error since that is not a valid route.
 | {base-url}/api/paintings/sort/nope
 | Returns an error since that is not a valid route.
+| {base-url}/api/paintings/artist/country/ital
+| Returns an error since that is not a valid route.
+This is a typo based on {base-url}/api/paintings/artists/country/ital.
 | {base-url}/appi/galleries/30
 | Returns an error in HTML since that is not a valid API route.
 |===
