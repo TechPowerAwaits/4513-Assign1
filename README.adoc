@@ -101,6 +101,10 @@ All errors are of the form:
 | /api/paintings/sort/_title\|year_
 | Returns all data from `Paintings` sorted either by `title` or `yearOfWork`.
 
+
+NOTE: This route is implemented as two routes internally.
+So, if an invalid sorting option is used, a Not Found error will be returned.
+
 | /api/paintings/_ref_
 | Returns the record from `Paintings` corresponding to the `paintingId` provided in _ref_.
 
@@ -123,6 +127,9 @@ Sorted by `title`.
 | /api/paintings/artists/country/_substring_
 | Returns the records from `Paintings` whose artist has a `nationality` starting with the given _substring_.
 Sorted by `title`.
+
+
+NOTE: The original route was /api/paintings/artists/country/_ref_, but the parameter name was changed to better reflect that the route accepts a substring and not an integral reference.
 
 | /api/genres
 | Returns all data from `Genres`.
