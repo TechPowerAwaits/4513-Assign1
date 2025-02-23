@@ -65,6 +65,8 @@ All errors are of the form:
 [source, javascript]
 {error: {message: "Error message"}}
 
+NOTE: All substrings used by routes are case insensitive unless otherwise stated.
+
 |===
 | Route | Description
 
