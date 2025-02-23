@@ -165,6 +165,37 @@ Sorted by the count in descending order.
 
 TIP: If an invalid route is entered, that is still considered an error condition and will be handled appropriately.
 
+==== Errors
+
+|===
+| Type | Cause | Status Code | Message
+
+| Internal
+| An error retrieving/processing data occurred.
+| 500
+| An internal error has occurred.
+
+| Integer Expected
+| A route that accepts parameters wanted an integer, but received some other type of value instead.
+| 400
+| A provided parameter should be an integer.
+
+| Invalid Range
+| A route that accepts a start and end for a range has received an end that comes before the start.
+| 400
+| Provided range is malformed. Ensure start is before or equal to end.
+
+| No Data
+| A route did not return any data using the given parameters.
+| https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#:~:text=In%20an%20API,%20this%20can%20also%20mean%20that%20the%20endpoint%20is%20valid%20but%20the%20resource%20itself%20does%20not%20exist.[404]
+| No data found. Invalid parameter?
+
+| Not Found
+| The path provided did not resolve to a valid route.
+| 404
+| Could not find what you were looking for. Please check your spelling.
+|===
+
 == Test Links
 
 |===
