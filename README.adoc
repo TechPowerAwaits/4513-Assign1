@@ -24,7 +24,7 @@ The data itself is from an unknown source.
 === Original Assignment
 The assignment information can be found at: https://github.com/mru-comp4513-archive/w2025-assign1.
 
-Thanks to https://randyconnolly.com/[Randy Connolly] for proving the assignment.
+Thanks to https://randyconnolly.com/[Randy Connolly] for providing the assignment.
 The aim of the original project was learning how to use Supabase alongside NodeJS to create a simple API.
 
 == Data
