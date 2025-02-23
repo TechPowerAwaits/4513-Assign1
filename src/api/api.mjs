@@ -41,7 +41,6 @@ const routes = [
   new APIRouteSetter("galleries", "/galleries"),
   new APIRouteSetter("genres", "/genres"),
   new APIRouteSetter("paintings", "/paintings"),
-  new APIRouteSetter("associatedPaintings", "/paintings"),
   new APIRouteSetter("shapes", "/shapes"),
 ];
 
