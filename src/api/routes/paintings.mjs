@@ -2,7 +2,7 @@
  * Purpose: To form routes for Paintings data.
  */
 
-import { generateDefaultRoute, handleQueryResults } from "../dataHandling.mjs";
+import { handleQueryResults } from "../dataHandling.mjs";
 import { DataGetter } from "../dataRetrieval.mjs";
 import { checkRange, setParamInt } from "../routeParse.mjs";
 import { fields as artistFields } from "./artists.mjs";
@@ -75,13 +75,8 @@ async function setRoutes(supabase, router) {
  * Purpose: Sets up all the routes that directly involve Paintings.
  */
 async function setBaseRoutes(dataGetter, router) {
-  generateDefaultRoute(router, dataGetter);
-
-  router.get("/sort/title", async (req, resp) => {
-    const { data, error } = await dataGetter.get().order("title");
-
-    handleQueryResults(resp, data, error);
-  });
+  router.get("/", sendPaintingsByTitle);
+  router.get("/sort/title", sendPaintingsByTitle);
 
   router.get("/sort/year", async (req, resp) => {
     const { data, error } = await dataGetter.get().order("yearOfWork");
@@ -115,6 +110,15 @@ async function setBaseRoutes(dataGetter, router) {
 
     handleQueryResults(resp, data, error);
   });
+
+  /*
+   * Purpose: Sends all Painting data in JSON format sorted by Painting title.
+   */
+  async function sendPaintingsByTitle(req, resp) {
+    const { data, error } = await dataGetter.get().order("title");
+
+    handleQueryResults(resp, data, error);
+  }
 }
 
 /*

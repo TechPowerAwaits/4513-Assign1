@@ -99,6 +99,7 @@ NOTE: All substrings used by routes are case insensitive unless otherwise stated
 
 | /api/paintings
 | Returns all data from `Paintings`.
+Sorted by `title`.
 
 | /api/paintings/sort/_title\|year_
 | Returns all data from `Paintings` sorted either by `title` or `yearOfWork`.
