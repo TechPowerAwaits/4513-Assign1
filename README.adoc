@@ -59,6 +59,7 @@ The aim of the original project was learning how to use Supabase alongside NodeJ
 === Routes
 
 NOTE: All data provided by the API routes are in JSON.
+Even if a route only returns one object, that object (unless it represents an error) will be wrapped within an array.
 
 IMPORTANT: If a parameter passed does not result in a record being found, an error will be returned.
 All errors are of the form:
