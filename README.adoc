@@ -208,6 +208,10 @@ TIP: If an invalid route is entered, that is still considered an error condition
 | Could not find what you were looking for. Please check your spelling.
 |===
 
+==== Supporting SQL
+
+See link:src/api/routes/sql/README.adoc[].
+
 == Test Links
 
 === Assignment Test Links
