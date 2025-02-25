@@ -216,26 +216,67 @@ These are the links that are required for the assignment.
 They are separated out for ease of marking.
 The comprehensive test links are below.
 
+
 {base-url}/api/eras
+
+
 {base-url}/api/galleries
+
+
 {base-url}/api/galleries/30
+
+
 {base-url}/api/galleries/Calgary
+
+
 {base-url}/api/galleries/country/fra
+
+
 {base-url}/api/artists
+
+
 {base-url}/api/artists/12
+
+
 {base-url}/api/artists/1223423
+
+
 {base-url}/api/artists/search/ma
+
+
 {base-url}/api/artists/search/mA
+
+
 {base-url}/api/artists/country/fra
+
+
 {base-url}/api/paintings
+
+
 {base-url}/api/paintings/sort/year
+
+
 {base-url}/api/paintings/63
+
+
 {base-url}/api/paintings/search/port
+
+
 {base-url}/api/paintings/search/pORt
+
+
 {base-url}/api/paintings/search/connolly
+
+
 {base-url}/api/paintings/years/1800/1850
+
+
 {base-url}/api/paintings/galleries/5
+
+
 {base-url}/api/paintings/artist/16
+
+
 {base-url}/api/paintings/artist/666
 
 
@@ -247,14 +288,32 @@ So, the link below will not work, but the following will: {base-url}/api/paintin
 
 
 {base-url}/api/genres
+
+
 {base-url}/api/genres/76
+
+
 {base-url}/api/genres/painting/408
+
+
 {base-url}/api/genres/painting/jsdfhg
+
+
 {base-url}/api/paintings/genre/78
+
+
 {base-url}/api/paintings/era/2
+
+
 {base-url}/api/counts/genres
+
+
 {base-url}/api/counts/artists
+
+
 {base-url}/api/counts/topgenres/20
+
+
 {base-url}/api/counts/topgenres/2034958
 
 === Comprehensive Test Links
