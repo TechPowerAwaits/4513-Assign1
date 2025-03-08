@@ -81,6 +81,7 @@ async function setBaseRoutes(dataGetter, router) {
   router.get("/sort/year", async (req, resp) => {
     const { data, error } = await dataGetter.get().order("yearOfWork");
 
+    parseJSONAnnotations(data);
     handleQueryResults(resp, data, error);
   });
 
@@ -89,6 +90,7 @@ async function setBaseRoutes(dataGetter, router) {
       .get()
       .eq("paintingId", req.intParams.ref);
 
+    parseJSONAnnotations(data);
     handleQueryResults(resp, data, error);
   });
 
@@ -98,6 +100,7 @@ async function setBaseRoutes(dataGetter, router) {
       .ilike("title", `%${req.params.substring}%`)
       .order("title");
 
+    parseJSONAnnotations(data);
     handleQueryResults(resp, data, error);
   });
 
@@ -108,6 +111,7 @@ async function setBaseRoutes(dataGetter, router) {
       .lte("yearOfWork", req.intParams.end)
       .order("yearOfWork");
 
+    parseJSONAnnotations(data);
     handleQueryResults(resp, data, error);
   });
 
@@ -117,6 +121,7 @@ async function setBaseRoutes(dataGetter, router) {
   async function sendPaintingsByTitle(req, resp) {
     const { data, error } = await dataGetter.get().order("title");
 
+    parseJSONAnnotations(data);
     handleQueryResults(resp, data, error);
   }
 }
@@ -131,6 +136,7 @@ async function setAssociatedRoutes(dataGetter, router) {
       .eq("galleryId", req.intParams.ref)
       .order("title");
 
+    parseJSONAnnotations(data);
     handleQueryResults(resp, data, error);
   });
 
@@ -140,6 +146,7 @@ async function setAssociatedRoutes(dataGetter, router) {
       .eq("artistId", req.intParams.ref)
       .order("title");
 
+    parseJSONAnnotations(data);
     handleQueryResults(resp, data, error);
   });
 
@@ -149,6 +156,7 @@ async function setAssociatedRoutes(dataGetter, router) {
       .ilike("Artists.nationality", `${req.params.substring}%`)
       .order("title");
 
+    parseJSONAnnotations(data);
     handleQueryResults(resp, data, error);
   });
 
@@ -169,6 +177,25 @@ async function setAssociatedRoutes(dataGetter, router) {
 
     handleQueryResults(resp, data, error);
   });
+}
+
+/*
+ * Purpose: Modifies the given data object such that the jsonAnnotations
+ * attribute is its own object.
+ *
+ * Details: It is assumed that if the first row doesn't contain a
+ * jsonAnnotations field, none of the subsequent rows would contain one.
+ */
+function parseJSONAnnotations(data) {
+  if (data.length > 0) {
+    if (data[0]["jsonAnnotations"]) {
+      data.forEach((row) => {
+        row["jsonAnnotations"] = JSON.parse(row["jsonAnnotations"]);
+      });
+    } else {
+      console.warn("Could not find jsonAnnotations field in data.");
+    }
+  }
 }
 
 export { fields, setRoutes, tableName };
