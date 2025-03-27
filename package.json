@@ -4,6 +4,7 @@
   "description": "Provides JSON data on various paintings and their attributes.",
   "main": "src/server.js",
   "scripts": {
+    "export-readme": "npx asciidoctor README.adoc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +19,7 @@
   "homepage": "https://github.com/TechPowerAwaits/4513-Assign1#readme",
   "dependencies": {
     "@supabase/supabase-js": "^2.48.1",
+    "asciidoctor": "^3.0.4",
     "express": "^4.21.2"
   },
   "devDependencies": {
