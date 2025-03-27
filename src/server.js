@@ -5,10 +5,12 @@
 import express from "express";
 import { setRoutes as setApiRoutes } from "./api/api.mjs";
 import { errorMessages } from "./errorMsg.mjs";
+import { corsAllowGet } from "./api/cors.mjs";
 
 const app = express();
 
 const apiRouter = express.Router();
+apiRouter.use(corsAllowGet);
 await setApiRoutes(apiRouter);
 
 app.use("/api", apiRouter);
