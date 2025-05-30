@@ -3,6 +3,7 @@ Richard Johnston <techpowerawaits@outlook.com>
 
 This folder contains any SQL functions that are used within the supabase instance in order to allow reproducibility and verification.
 
+// tag::sql-table[]
 |===
 | SQL | Route(s) Used In | Code File | Info
 
@@ -19,3 +20,4 @@ This folder contains any SQL functions that are used within the supabase instanc
 | PostgREST--at the time this API was made--did not support the `having` SQL clause, which made it difficult to filter by painting count (and thus, handle the latter route).
 Since both routes return similar data, it was decided to use a similar SQL function for both of them.
 |===
+// end::sql-table[]
