@@ -2,6 +2,8 @@
 Richard Johnston <techpowerawaits@outlook.com>
 :toc:
 :source-highlighter: highlight.js
+:route-path: src/api/routes
+:sql-path: {route-path}/sql
 :base-url: https://art-api-kafs.onrender.com
 ifdef::env-vscode[]
 :base-url: http://localhost:10000
@@ -62,10 +64,13 @@ The aim of the original project was learning how to use Supabase alongside NodeJ
 NOTE: All data provided by the API routes are in JSON.
 Even if a route only returns one object, that object (unless it represents an error) will be wrapped within an array.
 
-IMPORTANT: If a parameter passed does not result in a record being found, an error will be returned.
+[IMPORTANT]
+====
+If a parameter passed does not result in a record being found, an error will be returned.
+
 All errors are of the form:
-[source, javascript]
 {error: {message: "Error message"}}
+====
 
 NOTE: All substrings used by routes are case insensitive unless otherwise stated.
 
@@ -210,7 +215,12 @@ TIP: If an invalid route is entered, that is still considered an error condition
 
 ==== Supporting SQL
 
-See link:src/api/routes/sql/README.adoc[].
+ifdef::safe-mode-secure[]
+See xref:{sql-path}/README.adoc[].
+endif::[]
+ifndef::safe-mode-secure[]
+include::{sql-path}/README.adoc[tag=sql-table]
+endif::[]
 
 == Test Links
 
