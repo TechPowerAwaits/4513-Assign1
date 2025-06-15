@@ -15,6 +15,10 @@ import { setParamInt } from "../routeParse.mjs";
 async function setRoutes(supabase, router) {
   setParamInt(router, "ref");
 
+  // tag::uses-genrePaintingCount[]
+  /* Makes use of get_genre_painting_count() as PostgREST has no support for a
+   * having clause.
+   */
   router.get("/genres", async (req, resp) => {
     const { data, error } = await supabase
       .rpc("get_genre_painting_count")
@@ -22,12 +26,13 @@ async function setRoutes(supabase, router) {
 
     handleQueryResults(resp, data, error);
   });
+  // end::uses-genrePaintingCount[]
 
+  // tag::uses-artistName[]
+  /* Makes use of a computed field to easily get an artist's combined first-last name:
+   * https://postgrest.org/en/stable/references/api/computed_fields.html
+   */
   router.get("/artists", async (req, resp) => {
-    // Makes use of a computed field:
-    // https://postgrest.org/en/stable/references/api/computed_fields.html
-    // The example in the document was only modified slightly
-    // (if not broke, why fix it?).
     const { data, error } = await supabase
       .from("Paintings")
       .select(
@@ -38,7 +43,9 @@ async function setRoutes(supabase, router) {
 
     handleQueryResults(resp, data, error);
   });
+  // end::uses-artistName[]
 
+  // tag::uses-genrePaintingCount[]
   router.get("/topgenres/:ref", async (req, resp) => {
     const { data, error } = await supabase
       .rpc("get_genre_painting_count_above", { pcount: req.intParams.ref })
@@ -46,6 +53,7 @@ async function setRoutes(supabase, router) {
 
     handleQueryResults(resp, data, error);
   });
+  // end::uses-genrePaintingCount[]
 }
 
 export { setRoutes };
