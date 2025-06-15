@@ -1,23 +1,55 @@
 # Art API SQL
 Richard Johnston <techpowerawaits@outlook.com>
-
-This folder contains any SQL functions that are used within the supabase instance in order to allow reproducibility and verification.
+:source-highlighter: highlight.js
+// The paths are only for links pointing to files when the files themselves
+// cannot be included. They should be defined in any document that wants to
+// include the table.
+:route-path: ..
+:sql-path: .
 
 // tag::sql-table[]
+All SQL functions that are used within the supabase instance are specified in order to allow reproducibility and verification.
+
+[cols=2*a, separator=%]
 |===
-| SQL | Route(s) Used In | Code File | Info
+% SQL % Code
 
-| link:ArtistName.sql[]
-| /api/counts/artists
-| link:../counts.mjs[counts.mjs]
-| Makes it easier to return a combined first-last name.
+%
+[.text-center]
+link:{sql-path}/ArtistName.sql[]
+ifndef::safe-mode-secure[]
+[, sql]
+----
+include::./ArtistName.sql[]
+----
+endif::[]
+%
+[.text-center]
+link:{route-path}/counts.mjs[]
+ifndef::safe-mode-secure[]
+[, js]
+----
+include::../counts.mjs[tag=uses-artistName]
+----
+endif::[]
 
-| link:GenrePaintingCount.sql[]
-|
-/api/counts/genres/_ref_
-/api/counts/topgenres/_ref_
-| link:../counts.mjs[counts.mjs]
-| PostgREST--at the time this API was made--did not support the `having` SQL clause, which made it difficult to filter by painting count (and thus, handle the latter route).
-Since both routes return similar data, it was decided to use a similar SQL function for both of them.
+%
+[.text-center]
+link:{sql-path}/GenrePaintingCount.sql[]
+ifndef::safe-mode-secure[]
+[, sql]
+----
+include::./GenrePaintingCount.sql[]
+----
+endif::[]
+%
+[.text-center]
+link:{route-path}/counts.mjs[]
+ifndef::safe-mode-secure[]
+[, js]
+----
+include::../counts.mjs[tag=uses-genrePaintingCount]
+----
+endif::[]
 |===
 // end::sql-table[]
