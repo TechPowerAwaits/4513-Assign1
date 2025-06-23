@@ -23,5 +23,8 @@
   "devDependencies": {
     "prettier": "3.5.0"
   },
-  "type": "module"
+  "type": "module",
+  "optionalDependencies": {
+    "asciidoctor": "^3.0.4"
+  }
 }
