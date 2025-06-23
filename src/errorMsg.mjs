@@ -79,6 +79,10 @@ const errorMessages = {
     "Could not find what you were looking for. Please check your spelling.",
     404
   ),
+  missingResource: new ErrorMsg(
+    "The requested resource could not be accessed.",
+    500
+  ),
 };
 
 export { ErrorMsg, errorMessages };
