@@ -4,7 +4,8 @@
   "description": "Provides JSON data on various paintings and their attributes.",
   "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gen-readme": "npx asciidoctor --backend=html5 --destination-dir=./gen/ README.adoc"
   },
   "repository": {
     "type": "git",
