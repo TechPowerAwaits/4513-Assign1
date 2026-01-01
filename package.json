@@ -19,7 +19,7 @@
   "homepage": "https://github.com/TechPowerAwaits/4513-Assign1#readme",
   "dependencies": {
     "@supabase/supabase-js": "^2.50.0",
-    "express": "^4.21.2"
+    "express": "^4.22.1"
   },
   "devDependencies": {
     "prettier": "3.5.0"
